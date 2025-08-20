@@ -16,6 +16,7 @@ public partial class MissionUi : Control
 	Agent selectedAgent;
 	Button messageSendButton;
 	Button missionAssignmentButton;
+	Button mapButton;
 	VBoxContainer talkPanel;
 	Button nextTurnButton;
 	TextEdit messageTextEdit;
@@ -24,6 +25,7 @@ public partial class MissionUi : Control
 	public MissionAssignmentUI missionAssignmentUI;
 	public override void _Ready()
 	{
+		Fader.Instance.FadeIn(1.0f);
 		int current_turn = GameManager.Instance.CurrentTurn;
 		string missionTitle;
 		var timeOfDay = TimeUtils.GetTimeOfDay(current_turn);

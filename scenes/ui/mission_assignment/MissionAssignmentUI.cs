@@ -26,6 +26,7 @@ namespace Threshold.UI.MissionAssignment
         private Button RemoveAgentButton;
         private Button SubmitMissionButton;
         private Button ClearButton;
+        private Button MapButton;
         private Godot.Collections.Dictionary<string, Threshold.Core.Data.Place> availablePlaces = new Godot.Collections.Dictionary<string, Threshold.Core.Data.Place>();
         // 公共数据 - 可以被外部访问和修改
         public Array<Agent> MissionAgents { get; private set; } = new Array<Agent>();
@@ -58,24 +59,33 @@ namespace Threshold.UI.MissionAssignment
             // 任务设置区域
             MissionNameInput = GetNode<LineEdit>("ScrollContainer/VBoxContainer/MissionSetupSection/MissionNameContainer/MissionNameInput");
             MissionTypeOption = GetNode<OptionButton>("ScrollContainer/VBoxContainer/MissionSetupSection/MissionTypeContainer/MissionTypeOption");
-            
+
             // 地点选择区域
             BaseLocationOption = GetNode<OptionButton>("ScrollContainer/VBoxContainer/LocationSection/BaseLocationContainer/BaseLocationOption");
             TargetLocationOption = GetNode<OptionButton>("ScrollContainer/VBoxContainer/LocationSection/TargetLocationContainer/TargetLocationOption");
-            
+
             // 资源补给区域
             FoodSupplySlider = GetNode<HSlider>("ScrollContainer/VBoxContainer/ResourceSection/FoodSupplyContainer/FoodSupplySlider");
             FoodSupplyValue = GetNode<Label>("ScrollContainer/VBoxContainer/ResourceSection/FoodSupplyContainer/FoodSupplyValue");
             WaterSupplySlider = GetNode<HSlider>("ScrollContainer/VBoxContainer/ResourceSection/WaterSupplyContainer/WaterSupplySlider");
             WaterSupplyValue = GetNode<Label>("ScrollContainer/VBoxContainer/ResourceSection/WaterSupplyContainer/WaterSupplyValue");
-            
+
             // 人员分配区域
             SelectedAgentsList = GetNode<ItemList>("ScrollContainer/VBoxContainer/AgentSection/SelectedAgentsList");
             RemoveAgentButton = GetNode<Button>("ScrollContainer/VBoxContainer/AgentSection/AgentButtonsContainer/RemoveAgentButton");
-            
+
             // 操作按钮
             SubmitMissionButton = GetNode<Button>("ScrollContainer/VBoxContainer/ActionSection/SubmitMissionButton");
             ClearButton = GetNode<Button>("ScrollContainer/VBoxContainer/ActionSection/ClearButton");
+            MapButton = GetNode<Button>("ScrollContainer/VBoxContainer/Map");
+            MapButton.Pressed += () =>
+            {
+                Fader.Instance.FadeOut(1.0f, Callable.From(() =>
+                {
+                    Global.Instance.backScene = FastLoader.Instance.files["AssignMission"];
+                    GetTree().ChangeSceneToPacked(FastLoader.Instance.files["Map"]);
+                }));
+            };
         }
 
         /// <summary>

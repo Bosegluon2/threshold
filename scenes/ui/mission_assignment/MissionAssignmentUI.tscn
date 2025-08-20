@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bqxqxqxqxqxqx"]
+[gd_scene load_steps=3 format=3 uid="uid://bqxqxqxqxqxqx"]
 
 [ext_resource type="Script" uid="uid://bl684f7a5anmd" path="res://scenes/ui/mission_assignment/MissionAssignmentUI.cs" id="1_mission_assignment_ui"]
+[ext_resource type="PackedScene" uid="uid://bd5cab8k2jeni" path="res://scenes/ui/components/animated_button/AnimatedButton.tscn" id="2_q6313"]
 
 [node name="MissionAssignmentUI" type="Control"]
 layout_mode = 3
@@ -83,6 +84,7 @@ text = "地点选择"
 horizontal_alignment = 1
 
 [node name="BaseLocationContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/LocationSection"]
+visible = false
 layout_mode = 2
 
 [node name="BaseLocationLabel" type="Label" parent="ScrollContainer/VBoxContainer/LocationSection/BaseLocationContainer"]
@@ -196,6 +198,12 @@ text = "提交任务"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "清除数据"
+
+[node name="Map" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_q6313")]
+layout_mode = 2
+size_flags_horizontal = 1
+theme_override_font_sizes/font_size = 100
+text = "地图"
 
 [node name="Message" type="RichTextLabel" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2

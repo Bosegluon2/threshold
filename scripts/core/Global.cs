@@ -12,6 +12,9 @@ public partial class Global : Node
     public int Score { get; set; } = 0;
     public HashSet<string> visitedCameraLockers = new HashSet<string>();
     public String sceneLoaded = "test.tscn";
+    public PackedScene backScene;
+
+
     public static Global GetInstance()
     {
         return _instance;

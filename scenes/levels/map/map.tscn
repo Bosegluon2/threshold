@@ -1,13 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://becv13fru3vco"]
+[gd_scene load_steps=8 format=3 uid="uid://becv13fru3vco"]
 
 [ext_resource type="Script" uid="uid://cieqjpo1allw7" path="res://scenes/levels/map/Map.cs" id="1_2cthb"]
+[ext_resource type="Script" uid="uid://b0jnse3mcwl00" path="res://scenes/levels/map/MapControl.cs" id="1_03hf8"]
 [ext_resource type="Script" uid="uid://c6bxv3y57jtyb" path="res://scripts/controller/CameraNavigator.cs" id="1_qagll"]
+[ext_resource type="FontFile" uid="uid://dtmhehlp8yaqc" path="res://assets/fonts/新愚公装甲宋B.ttf" id="4_a3v6f"]
+[ext_resource type="PackedScene" uid="uid://bd5cab8k2jeni" path="res://scenes/ui/components/animated_button/AnimatedButton.tscn" id="5_iouwg"]
 
 [sub_resource type="Environment" id="Environment_03hf8"]
 background_mode = 1
-background_color = Color(1, 1, 1, 1)
+background_color = Color(0.823529, 0.721569, 1, 1)
+
+[sub_resource type="Theme" id="Theme_03hf8"]
+default_font = ExtResource("4_a3v6f")
+default_font_size = 100
 
 [node name="Map" type="Node3D"]
+script = ExtResource("1_03hf8")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
@@ -26,3 +34,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 14)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_03hf8")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_03hf8")
+
+[node name="Back" parent="Control" instance=ExtResource("5_iouwg")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -208.0
+offset_top = -108.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 200
+text = "返回"

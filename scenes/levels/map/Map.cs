@@ -10,6 +10,7 @@ public partial class Map : Node3D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		
 		GD.Print("所有可用位置");
 		Array<Place> places = GameManager.Instance.Library.GetAllPlaces();
 		GD.Print(places);

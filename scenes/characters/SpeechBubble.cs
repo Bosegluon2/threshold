@@ -17,9 +17,26 @@ public partial class SpeechBubble : Node3D
 	public async void Speak(string text,float duration=3.0f)
 	{
 		GD.Print("Speak: " + text);
-		label.Text = text;
-		Visible = true;
-		await ToSignal(GetTree().CreateTimer(duration), "timeout");
-		Visible = false;
+		
+		// 检查label是否仍然有效
+		if (label != null && IsInstanceValid(label))
+		{
+			label.Text = text;
+			Visible = true;
+			
+			// 检查对象是否仍然有效，如果无效则提前返回
+			if (!IsInstanceValid(this))
+			{
+				return;
+			}
+			
+			await ToSignal(GetTree().CreateTimer(duration), "timeout");
+			
+			// 再次检查对象是否仍然有效
+			if (IsInstanceValid(this))
+			{
+				Visible = false;
+			}
+		}
 	}
 }

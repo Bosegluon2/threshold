@@ -7,7 +7,6 @@
 [node name="Button" type="Button"]
 size_flags_horizontal = 0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_ck7fs")
-text = "123123123123123"
 flat = true
 script = ExtResource("1_x7ha8")
 

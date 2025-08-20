@@ -8,7 +8,6 @@ public partial class FastLoader : Node
 	
 	//Singleton
 	public static FastLoader Instance { get; private set; }
-
 	public override void _EnterTree()
 	{
 		Instance = this;
@@ -19,6 +18,7 @@ public partial class FastLoader : Node
 		files["AssignMission"] = GD.Load<PackedScene>("res://scenes/levels/assign_misson/assign_mission.tscn");
 		files["MidnightEvent"] = GD.Load<PackedScene>("res://scenes/levels/midnight_event/midnight_event.tscn");
 		files["Preface"] = GD.Load<PackedScene>("res://scenes/levels/preface/preface.tscn");
+		files["Map"] = GD.Load<PackedScene>("res://scenes/levels/map/map.tscn");
 	}
 	public void LoadScene(string scenePath)
 	{
