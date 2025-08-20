@@ -1,0 +1,28 @@
+id: "prometheus_storage_zone"
+name: "普罗米修斯观测站仓储区"
+description: "位于普罗米修斯观测站西南侧的多功能仓储区域，用于存放食品、科研设备、工具、燃料及紧急物资。内部采用模块化货架系统与自动搬运轨道，可在低温环境下保持物资长期存储。部分区域为恒温仓，用于保存对温度敏感的设备与样本。仓储区进出需要通过身份验证与物资登记系统。"
+type: "storage"
+is_accessible: true
+parent_id: ""
+position: [-6, -5, 0]
+capacity: 10
+level: 0
+tags: ["logistics", "storage", "infrastructure"]
+state: "operational"
+environment: "indoor"
+can_get_time: true
+can_get_weather: false
+can_get_location: true
+can_get_atmosphere: false
+light_level: 0.6
+temperature: -5.0
+
+on_agent_enter_script: |
+  // 检查身份
+  if (!agent.hasPermission("storage_access")) {
+    return false;
+  }
+  return true
+
+on_agent_leave_script: |
+  return true

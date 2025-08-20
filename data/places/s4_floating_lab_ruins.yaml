@@ -1,0 +1,24 @@
+id: "s4_floating_lab_ruins"
+name: "S4号浮动实验站"
+description: "漂浮于外海科研区的S4号实验站，曾负责零点能稳定化实验。一次裂痕能量波动中，护航舰队全数失联，实验站被切割成数个漂离的模块，其中一部分沉入冰冷海底。残留的能量护罩间歇闪烁，释放出的低频嗡鸣在数公里外都可听见。"
+type: "ruins"
+is_accessible: false
+parent_id: ""
+position: [-12, -75, 0]
+capacity: 0
+level: 3
+tags: ["ruins", "offshore", "danger_zone", "research"]
+state: "derelict"
+environment: "offshore"
+can_get_time: true
+can_get_weather: true
+can_get_location: true
+can_get_atmosphere: true
+light_level: 0.3
+temperature: -35.0
+
+on_agent_enter_script: |
+  return true
+
+on_agent_leave_script: |
+  return true

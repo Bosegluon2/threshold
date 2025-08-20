@@ -1,0 +1,24 @@
+id: "aurora_rift_sea"
+name: "极光裂海"
+description: "裂痕释放的能量与极地高空的极光相互作用，在海面上形成一片绚烂的光墙。夜间，光墙会随裂痕脉动而变化颜色，既是壮丽景象，也是危险信号。靠近时，船体仪器会受到强电磁干扰。"
+type: "natural_wonder"
+is_accessible: false
+parent_id: ""
+position: [-90, -70, 0]
+capacity: 0
+level: 3
+tags: ["natural", "wonder", "danger_zone", "rift"]
+state: "active"
+environment: "offshore"
+can_get_time: true
+can_get_weather: true
+can_get_location: true
+can_get_atmosphere: false
+light_level: 0.7
+temperature: -40.0
+
+on_agent_enter_script: |
+  return true
+
+on_agent_leave_script: |
+  return true

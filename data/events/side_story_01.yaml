@@ -1,0 +1,273 @@
+# 支线剧情树配置
+event_tree:
+  tree_id: "side_story_01"
+  tree_name: "神秘商人"
+  tree_type: "side"
+  priority: 70
+  is_required: false
+  
+  # 根事件 - 触发支线剧情
+  root_event:
+    event_id: "side_001"
+    event_name: "神秘商人"
+    description: "一个神秘的商人出现在学院附近"
+    type: "side"
+    activation_turn: 25
+    expiration_turn: 80
+    duration: 55
+    is_persistent: false
+    
+    # 激活条件
+    activation_conditions:
+      - type: "script"
+        condition_id: "merchant_appears"
+        description: "检查商人是否出现"
+        condition_script: |
+          # 检查商人是否出现
+          var worldState = Global.globalVariables
+          if worldState.has("merchant_appearance_turn"):
+              var appearanceTurn = worldState["merchant_appearance_turn"]
+              var currentTurn = Global.globalVariables.get("current_turn", 0)
+              return currentTurn >= appearanceTurn
+          return true
+    
+    # 必需任务
+    required_tasks:
+      - task_id: "side_001_task_01"
+        task_name: "调查商人"
+        task_type: "exploration"
+        description: "调查神秘商人的身份"
+        required_progress: 100
+        vote_weight: 1.0
+        cooldown: 0
+        objectives:
+          - type: "investigate"
+            target: "mysterious_merchant"
+            required: 1
+        rewards:
+          - type: "information"
+            target: "merchant_secret"
+            value: "merchant_background"
+            quantity: 1
+    
+    # 分支选择
+    branches:
+      - branch_id: "help_merchant"
+        branch_name: "帮助商人"
+        description: "选择帮助神秘商人"
+        type: "manual"
+        probability: 0.5
+        enable_conditions:
+          - type: "script"
+            condition_id: "can_help_merchant"
+            description: "检查是否可以帮助商人"
+            condition_script: |
+              # 检查角色状态是否适合帮助商人
+              var charManager = GameManager.CharacterManager
+              if charManager != null:
+                  var player = charManager.GetCharacterById("char_0001")
+                  if player != null:
+                      var energy = player.CurrentEnergy
+                      var health = player.CurrentHealth
+                      return energy >= 30 and health >= 50
+              return true
+        next_events:
+          - event_id: "side_002_help"
+            event_name: "商人的请求"
+            activation_delay: 3
+    
+      - branch_id: "ignore_merchant"
+        branch_name: "忽略商人"
+        description: "选择不理会商人"
+        type: "manual"
+        probability: 0.5
+        enable_conditions:
+          - type: "script"
+            condition_id: "can_ignore_merchant"
+            description: "检查是否可以忽略商人"
+            condition_script: |
+              # 检查角色状态是否适合忽略商人
+              var charManager = GameManager.CharacterManager
+              if charManager != null:
+                  var player = charManager.GetCharacterById("char_0001")
+                  if player != null:
+                      var energy = player.CurrentEnergy
+                      var health = player.CurrentHealth
+                      return energy >= 10 and health >= 20
+              return true
+        next_events:
+          - event_id: "side_002_ignore"
+            event_name: "错失机会"
+            activation_delay: 1
+    
+    # 完成条件
+    completion_conditions:
+      - type: "script"
+        condition_id: "side_001_completion"
+        description: "检查支线任务是否完成"
+        condition_script: |
+          # 检查任务完成状态
+          var taskManager = GameManager.TaskManager
+          if taskManager != null:
+              var task = taskManager.GetTask("side_001_task_01")
+              if task != null:
+                  return task.Status == "completed"
+          return false
+    
+    # 事件触发时执行一次的效果脚本
+    event_script: |
+      # 支线事件触发脚本 - 只执行一次
+      print("支线事件：神秘商人触发！")
+      
+      # 记录遇到商人的状态
+      Global.globalVariables["merchant_encountered"] = true
+      
+      # 添加持续性效果到EventManager
+      var eventManager = GameManager.EventManager
+      if eventManager != null:
+          # 添加商人相关知识效果
+          var knowledgeEffect = {
+              "effect_id": "char_merchant_knowledge",
+              "effect_type": "skill_boost",
+              "duration": 55,
+              "target": "char_0001",
+              "skill": "negotiation",
+              "value": 5
+          }
+          eventManager.AddCharacterEffect(knowledgeEffect)
+      
+      print("支线事件持续性效果已添加到EventManager")
+      return true
+    
+    # 世界影响 - 通过Effect系统实现
+    world_effects: []
+    
+    # 角色影响 - 通过Effect系统实现
+    character_effects: []
+  
+  # 其他事件节点
+  events:
+    # 帮助商人分支
+    - event_id: "side_002_help"
+      event_name: "商人的请求"
+      description: "商人请求帮助运送货物"
+      type: "side"
+      activation_turn: 28
+      expiration_turn: 85
+      duration: 57
+      is_persistent: false
+      
+      required_tasks:
+        - task_id: "side_002_help_task_01"
+          task_name: "运送货物"
+          task_type: "collection"
+          description: "帮助商人运送神秘货物"
+          required_progress: 100
+          vote_weight: 1.0
+          cooldown: 0
+          objectives:
+            - type: "deliver_item"
+              target: "mysterious_cargo"
+              required: 1
+          rewards:
+            - type: "item"
+              target: "rare_artifact"
+              value: null
+              quantity: 1
+            - type: "gold"
+              target: "char_0001"
+              value: 500
+              quantity: 1
+      
+      branches:
+        - branch_id: "help_ending"
+          branch_name: "友谊结局"
+          description: "与商人建立友谊"
+          probability: 1.0
+          next_events:
+            - event_id: "side_003_help_ending"
+              event_name: "友谊的回报"
+              activation_delay: 2
+      
+      completion_conditions:
+        - type: "task_completion"
+          target: "side_002_help_task_01"
+          required: true
+    
+    # 忽略商人分支
+    - event_id: "side_002_ignore"
+      event_name: "错失机会"
+      description: "错过了与商人交易的机会"
+      type: "side"
+      activation_turn: 26
+      expiration_turn: 30
+      duration: 4
+      is_persistent: false
+      
+      required_tasks:
+        - task_id: "side_002_ignore_task_01"
+          task_name: "后悔"
+          task_type: "dialogue"
+          description: "意识到错过了机会"
+          required_progress: 100
+          vote_weight: 1.0
+          cooldown: 0
+          objectives:
+            - type: "realize_mistake"
+              target: "missed_opportunity"
+              required: 1
+          rewards:
+            - type: "experience"
+              target: "char_0001"
+              value: 20
+              quantity: 1
+      
+      # 这是忽略分支的结束节点
+      is_ending: true
+      ending_type: "missed"
+      
+      completion_conditions:
+        - type: "task_completion"
+          target: "side_002_ignore_task_01"
+          required: true
+    
+    # 帮助商人的结局
+    - event_id: "side_003_help_ending"
+      event_name: "友谊的回报"
+      description: "商人给予丰厚的回报"
+      type: "side"
+      activation_turn: 30
+      expiration_turn: 120
+      duration: 90
+      is_persistent: false
+      
+      required_tasks:
+        - task_id: "side_003_help_ending_task_01"
+          task_name: "接受回报"
+          task_type: "dialogue"
+          description: "接受商人的感谢和回报"
+          required_progress: 100
+          vote_weight: 1.0
+          cooldown: 0
+          objectives:
+            - type: "accept_reward"
+              target: "merchant_gratitude"
+              required: 1
+          rewards:
+            - type: "relationship"
+              target: "mysterious_merchant"
+              value: 50
+              quantity: 1
+            - type: "special_access"
+              target: "char_0001"
+              value: "merchant_network"
+              quantity: 1
+      
+      # 这是帮助分支的结束节点
+      is_ending: true
+      ending_type: "friendship"
+      
+      completion_conditions:
+        - type: "task_completion"
+          target: "side_003_help_ending_task_01"
+          required: true

@@ -1,0 +1,67 @@
+id: "multi_shot"
+name: "多重射击"
+description: "发射多支箭矢，对多个目标造成伤害"
+category: "combat"
+type: "active"
+element: "physical"
+level: 1
+max_level: 10
+energy_cost: 35
+cooldown: 12.0
+range: 25.0
+area_of_effect: 0.0
+icon: "res://assets/icons/skills/multi_shot.png"
+animation: "cast_multi_shot"
+sound_effect: "res://assets/audio/sfx/multi_shot_cast.wav"
+effect_script: |
+  # 多重射击效果脚本 - 展示完整的GDScript语法支持
+  
+  # 1. 检查冷却时间
+  if skill.isOnCooldown and (currentTime - lastUsedTime) < cooldown:
+    Context.Print("技能还在冷却中")
+    return 1  # 使用失败
+  
+  # 2. 检查能量消耗
+  if currentEnergy < skill.energyCost:
+    Context.Print("能量不足")
+    return 1  # 使用失败
+  
+  # 3. 检查目标
+  if target == null:
+    Context.Print("没有指定目标")
+    return 1  # 使用失败
+  
+  # 4. 计算箭矢数量和伤害
+  var arrowCount = skill.level + 2  # 基础2支 + 每级1支
+  var baseDamage = skill.level * 8 + 15  # 基础伤害15 + 每级8点
+  var totalDamage = 0
+  
+  # 5. 使用for循环发射多支箭矢
+  for i in range(arrowCount):
+    # 每支箭矢的伤害略有变化
+    var arrowDamage = baseDamage + Context.Random.Next(-3, 4)  # -3到+3的随机变化
+    
+    # 对目标造成伤害
+    var targetHealth = Context.PathGet(target, "currentHealth")
+    if targetHealth != null:
+      var newHealth = targetHealth - arrowDamage
+      Context.PathSet(target, "currentHealth", newHealth)
+      totalDamage += arrowDamage
+      
+      Context.Print("第" + str(i + 1) + "支箭矢造成 " + str(arrowDamage) + " 点伤害")
+  
+  # 6. 检查是否触发暴击效果
+  var critChance = skill.level * 0.05  # 每级5%暴击率
+  if Context.Random.NextDouble() < critChance:
+    var critDamage = totalDamage * 0.5  # 暴击额外50%伤害
+    var targetHealth = Context.PathGet(target, "currentHealth")
+    if targetHealth != null:
+      var newHealth = targetHealth - critDamage
+      Context.PathSet(target, "currentHealth", newHealth)
+      totalDamage += critDamage
+      Context.Print("暴击！额外造成 " + str(critDamage) + " 点伤害")
+  
+  Context.Print("多重射击总共造成 " + str(totalDamage) + " 点伤害")
+  
+  # 7. 返回成功，技能系统会自动更新冷却时间
+  return 0

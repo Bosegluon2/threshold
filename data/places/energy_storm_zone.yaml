@@ -1,0 +1,24 @@
+id: "energy_storm_zone"
+name: "能量风暴区"
+description: "位于极地洋流交汇处的能量风暴区，裂痕能量与高纬气流相互作用，形成周期性爆发的蓝白色雷暴。风暴中心的电磁干扰足以摧毁所有常规通讯设备。每一次风暴爆发，都会在海面留下短暂的幽光漩涡。"
+type: "natural_hazard"
+is_accessible: false
+parent_id: ""
+position: [-0, -80, 0]
+capacity: 0
+level: 4
+tags: ["natural", "danger_zone", "weather", "energy"]
+state: "active"
+environment: "offshore"
+can_get_time: true
+can_get_weather: true
+can_get_location: true
+can_get_atmosphere: false
+light_level: 0.1
+temperature: -45.0
+
+on_agent_enter_script: |
+  return true
+
+on_agent_leave_script: |
+  return true

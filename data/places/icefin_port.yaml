@@ -1,0 +1,24 @@
+id: "icefin_port"
+name: "冰鳍港"
+description: "一座位于裂痕海域边缘的小型港口，由渔民、探险者与走私者共同维持。港口建筑依附在天然冰崖上，内部设有补给站与情报交易所，是极地航行者的临时避风港。"
+type: "settlement"
+is_accessible: true
+parent_id: ""
+position: [-30, -40, 0]
+capacity: 50
+level: 1
+tags: ["settlement", "port", "trade", "safe_zone"]
+state: "active"
+environment: "coastal"
+can_get_time: true
+can_get_weather: true
+can_get_location: true
+can_get_atmosphere: true
+light_level: 0.5
+temperature: -28.0
+
+on_agent_enter_script: |
+  return true
+
+on_agent_leave_script: |
+  return true

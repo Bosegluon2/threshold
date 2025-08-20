@@ -1,0 +1,24 @@
+id: "northwind_trade_post"
+name: "北风交易站"
+description: "位于外缘冰原与海域交界处的临时集结点，由游牧商队和流动商人搭建。交易站由数个加固帐篷和木制平台组成，提供有限的补给与情报交换。这里是探险者进入裂痕海域前最后的补给点。"
+type: "settlement"
+is_accessible: true
+parent_id: ""
+position: [-15, -20, 0]
+capacity: 40
+level: 1
+tags: ["settlement", "trade", "safe_zone", "temporary"]
+state: "active"
+environment: "icefield"
+can_get_time: true
+can_get_weather: true
+can_get_location: true
+can_get_atmosphere: true
+light_level: 0.5
+temperature: -26.0
+
+on_agent_enter_script: |
+  return true
+
+on_agent_leave_script: |
+  return true

@@ -1,0 +1,24 @@
+id: "rift_corridor"
+name: "断潮走廊"
+description: "一条狭长的峡湾航道，被一道零点能裂痕从中央劈开，两侧冰崖如刀锋般直立。海流在裂痕附近变得紊乱，船只需要极高的操控技术才能安全通过。裂痕深处偶尔会喷发出幽蓝色的能量雾。"
+type: "natural_hazard"
+is_accessible: false
+parent_id: ""
+position: [-60, -60, 0]
+capacity: 0
+level: 3
+tags: ["natural", "danger_zone", "rift", "navigation"]
+state: "active"
+environment: "offshore"
+can_get_time: true
+can_get_weather: true
+can_get_location: true
+can_get_atmosphere: false
+light_level: 0.2
+temperature: -38.0
+
+on_agent_enter_script: |
+  return true
+
+on_agent_leave_script: |
+  return true

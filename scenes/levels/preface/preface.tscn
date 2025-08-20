@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbmh1d4vmdgwm"]
+
+[ext_resource type="Script" uid="uid://dwcet7uoga155" path="res://scenes/levels/preface/Preface.cs" id="1_8ol38"]
+[ext_resource type="Shader" uid="uid://c2uj6kj7qyumd" path="res://assets/shaders/ChromaticAbberation.gdshader" id="2_rqgvd"]
+[ext_resource type="FontFile" uid="uid://b08kqqjj5xjw0" path="res://assets/fonts/匯文港黑.ttf" id="2_yvekh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yvekh"]
+shader = ExtResource("2_rqgvd")
+shader_parameter/levels = 500
+shader_parameter/_amount = 1.29
+shader_parameter/_aberrationCenter = Vector2(0.5, 0.5)
+shader_parameter/_centerFade = 0.154
+
+[node name="Preface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8ol38")
+
+[node name="ContentLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -20.5
+offset_bottom = 20.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_yvekh")
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Effect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_yvekh")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

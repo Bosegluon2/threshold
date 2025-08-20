@@ -1,0 +1,24 @@
+id: "t3_drilling_platform"
+name: "T-3钻井平台"
+description: "位于异常海域边缘的零点能钻探平台，最初用于采集稀有元素以维持观测站的量子稳定场。平台长期暴露在异常能量辐射下，金属表面覆盖着奇异的晶体结构，海浪间偶尔出现不属于这个世界的生物轮廓。"
+type: "industrial"
+is_accessible: true
+parent_id: ""
+position: [50, 0, 50]
+capacity: 12
+level: 2
+tags: ["resource", "zero_point_energy", "hazard", "offshore"]
+state: "normal"
+environment: "outdoor"
+can_get_time: true
+can_get_weather: true
+can_get_location: true
+can_get_atmosphere: true
+light_level: 0.6
+temperature: 5.0
+
+on_agent_enter_script: |
+  return true
+
+on_agent_leave_script: |
+  return true

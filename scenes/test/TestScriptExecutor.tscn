@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqxvj8yqxqxqx"]
+
+[ext_resource type="Script" path="res://scripts/test/ScriptExecutorTest.cs" id="1_0"]
+
+[node name="TestScriptExecutor" type="Node"]
+script = ExtResource("1_0")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 800.0
+offset_bottom = 600.0
+color = Color(0.2, 0.2, 0.2, 1)

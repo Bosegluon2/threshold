@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=3 uid="uid://bfqivnlutcl35"]
+
+[ext_resource type="Script" uid="uid://d1d7wpniirnsi" path="res://scenes/characters/Character.cs" id="1_x31xa"]
+[ext_resource type="Texture2D" uid="uid://bxeg0h2a2vf1f" path="res://data/image/bubble/bubble.png" id="2_1bdar"]
+[ext_resource type="Script" uid="uid://c3hduud0romox" path="res://scenes/characters/SpeechBubble.cs" id="2_e22cc"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_1bdar"]
+viewport_path = NodePath("SpeechBubble/Sprite3D/SubViewport")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1bdar"]
+
+[node name="Character" type="Node3D"]
+script = ExtResource("1_x31xa")
+
+[node name="SpeechBubble" type="Node3D" parent="."]
+script = ExtResource("2_e22cc")
+
+[node name="Sprite3D" type="Sprite3D" parent="SpeechBubble"]
+offset = Vector2(262.21, 468.245)
+pixel_size = 0.005
+billboard = 1
+texture = SubResource("ViewportTexture_1bdar")
+region_rect = Rect2(0, 0, 512, 512)
+
+[node name="SubViewport" type="SubViewport" parent="SpeechBubble/Sprite3D"]
+transparent_bg = true
+
+[node name="Control" type="Control" parent="SpeechBubble/Sprite3D/SubViewport"]
+custom_minimum_size = Vector2(512, 512)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 512.0
+offset_bottom = 512.0
+
+[node name="TextureRect" type="TextureRect" parent="SpeechBubble/Sprite3D/SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -74.56
+offset_top = -31.915
+offset_right = -74.56
+offset_bottom = -31.915
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("2_1bdar")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="SpeechBubble/Sprite3D/SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -45.5
+offset_right = 45.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 35
+theme_override_font_sizes/font_size = 50
+text = "1
+2
+3
+4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_1bdar")

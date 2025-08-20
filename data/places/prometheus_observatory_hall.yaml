@@ -1,0 +1,24 @@
+id: "prometheus_observatory_hall"
+name: "普罗米修斯观测站大厅"
+description: "普罗米修斯观测站的中枢指挥大厅，环形全息屏幕实时显示零点能波动、维度裂缝状态与外部环境数据。这里汇聚了五大派系的代表，所有重大决策与危机应对方案都在此讨论并执行。空气中弥漫着紧张的氛围，墙壁上嵌有政府徽章与科学派的核心宣言。"
+type: "center"
+is_accessible: true
+parent_id: ""
+position: [0, 0, 0]
+capacity: 30
+level: 0
+tags: ["command", "decision", "politics", "zero_point_energy"]
+state: "normal"
+environment: "indoor"
+can_get_time: true
+can_get_weather: false
+can_get_location: true
+can_get_atmosphere: true
+light_level: 0.9
+temperature: 20.0
+
+on_agent_enter_script: |
+  return true
+
+on_agent_leave_script: |
+  return true

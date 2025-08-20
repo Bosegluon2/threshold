@@ -1,0 +1,18 @@
+id: "normal"
+name: "正常"
+description: "身体和精神状态正常，没有特殊效果"
+icon: "res://assets/icons/status/normal.png"
+category: "neutral"
+priority: 1
+duration: -1  # 永久状态
+stackable: false
+removable: false
+effect_script: |
+  # 正常状态效果脚本
+  var status = ScriptExecutor.Context['status']
+  var target = ScriptExecutor.Context['target']
+  
+  # 正常状态没有特殊效果，只是保持基础状态
+  print('正常状态：身体和精神状态正常')
+  
+  return true

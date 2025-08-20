@@ -1,0 +1,33 @@
+id: "teleport"
+name: "传送术"
+description: "瞬间传送到指定位置，无视障碍物"
+icon: "res://assets/icons/skills/teleport.png"
+category: "utility"
+type: "movement"
+element: "arcane"
+base_level: 1
+max_level: 8
+base_range: 15.0
+range_scaling: 2.0  # 每级增加2米范围
+energy_cost: 25
+cooldown: 8.0  # 8秒冷却时间
+requirements:
+  - type: "level"
+    value: 3
+  - type: "attribute"
+    name: "base_reasoning"
+    value: 7
+effects:
+  - type: "movement"
+    value: "instant"
+  - type: "invulnerability"
+    duration: 0.5  # 传送过程中短暂无敌
+upgrades:
+  - level: 3
+    effect: "减少冷却时间到6秒"
+  - level: 5
+    effect: "传送后短暂隐身"
+  - level: 7
+    effect: "可以携带队友一起传送"
+  - level: 8
+    effect: "传送不消耗能量"

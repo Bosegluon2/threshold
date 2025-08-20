@@ -1,0 +1,36 @@
+id: "focus"
+name: "专注"
+description: "精神高度集中，学习和工作效率提升"
+icon: "res://assets/icons/status/focus.png"
+category: "mental"
+priority: 2
+duration: 1200  # 20分钟
+stackable: false
+removable: true
+effect_script: |
+  # 专注状态效果脚本
+  var status = ScriptExecutor.Context['status']
+  var target = ScriptExecutor.Context['target']
+  
+  # 技能效果提升15%
+  for i in target.CurrentStatus:
+      if i.Id == 'skill_bonus':
+          i.CurrentDuration += 15
+          break
+  print('专注状态：技能效果提升15%')
+  
+  # 学习效率提升20%
+  for i in target.CurrentStatus:
+      if i.Id == 'learning_bonus':
+          i.CurrentDuration += 20
+          break
+  print('专注状态：学习效率提升20%')
+  
+  # 每60秒消耗1点能量值
+  var currentEnergy = target.CurrentEnergy
+  if currentEnergy > 0:
+      var newEnergy = max(currentEnergy - 1, 0)
+      target.SetEnergy(newEnergy)
+      print('专注状态：消耗1点能量值')
+  
+  return true

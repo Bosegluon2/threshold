@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqxqxqxqxqxr"]
+
+[ext_resource type="Script" path="res://scripts/core/GameManager.cs" id="1_0"]
+[ext_resource type="Script" path="res://scripts/test/CharacterManagerTest.cs" id="2_0"]
+
+[node name="TestCharacterManager" type="Node"]
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_0")
+
+[node name="CharacterManagerTest" type="Node" parent="."]
+script = ExtResource("2_0")
+

@@ -1,0 +1,219 @@
+# 测试事件数据
+event_trees:
+  test_main_story:
+    tree_id: "test_main_story"
+    tree_name: "测试主线故事"
+    tree_type: "main"
+    priority: 100
+    is_required: true
+    
+    events:
+      - event_id: "test_event_001"
+        event_name: "测试事件1 - 开始冒险"
+        description: "这是一个测试事件，玩家需要完成任务来推进故事"
+        event_type: "main"
+        activation_turn: 0
+        duration: 5
+        is_persistent: false
+        
+        required_tasks:
+          - task_id: "task_001"
+            task_name: "收集信息"
+            task_type: "exploration"
+            description: "收集关于世界的信息"
+            required_progress: 100
+            objectives:
+              - type: "collection"
+                target: "world_info"
+                required: 3
+                current: 0
+        
+        branches:
+          - branch_id: "branch_001"
+            branch_name: "选择路径A"
+            type: "manual"
+            probability: 0.5
+            enable_conditions:
+              - condition_id: "cond_magic_available"
+                type: "script"
+                description: "检查魔法学院是否可用"
+                condition_script: |
+                  # 检查魔法学院是否可用
+                  var magicAvailable = Global.globalVariables.get("magic_academy_available", false)
+                  return magicAvailable == true
+            next_events:
+              - event_id: "test_event_002a"
+                event_name: "路径A - 魔法学院"
+                activation_delay: 1
+        
+          - branch_id: "branch_002"
+            branch_name: "选择路径B"
+            type: "manual"
+            probability: 0.5
+            enable_conditions:
+              - condition_id: "cond_combat_available"
+                type: "script"
+                description: "检查战士公会是否可用"
+                condition_script: |
+                  # 检查战士公会是否可用
+                  var combatAvailable = Global.globalVariables.get("warrior_guild_available", false)
+                  return combatAvailable == true
+            next_events:
+              - event_id: "test_event_002a"
+                event_name: "路径B - 战士公会"
+                activation_delay: 1
+          
+          - branch_id: "branch_auto"
+            branch_name: "自动选择路径"
+            type: "auto"
+            probability: 1.0
+            enable_conditions:
+              - condition_id: "cond_auto_path"
+                type: "script"
+                description: "根据角色技能自动选择路径"
+                condition_script: |
+                  # 检查角色魔法理论技能等级
+                  var charManager = GameManager.CharacterManager
+                  if charManager != null:
+                      var character = charManager.GetCharacterById("char_0001")
+                      if character != null:
+                          if character.Skills.has("magic_theory"):
+                              var magicLevel = character.Skills["magic_theory"].Level
+                              return magicLevel > 5
+                  return false
+            next_events:
+              - event_id: "test_event_002a"
+                event_name: "路径A - 魔法学院"
+                activation_delay: 1
+        
+        # 事件触发时执行一次的效果脚本
+        event_script: |
+          # 测试事件触发脚本 - 只执行一次
+          print("测试事件1触发！")
+          
+          # 设置世界状态
+          Global.globalVariables["adventure_started"] = true
+          
+          # 添加持续性效果到EventManager
+          var eventManager = GameManager.EventManager
+          if eventManager != null:
+              # 添加世界状态效果
+              var worldEffect = {
+                  "effect_id": "world_test_effect",
+                  "effect_type": "world_state",
+                  "duration": 5,
+                  "target": "world_state",
+                  "value": "adventure_started"
+              }
+              eventManager.AddWorldEffect(worldEffect)
+          
+          print("测试事件持续性效果已添加到EventManager")
+          return true
+        
+        # 世界影响 - 通过Effect系统实现
+        world_effects: []
+        
+        # 角色影响 - 通过Effect系统实现
+        character_effects: []
+
+      - event_id: "test_event_002a"
+        event_name: "路径A - 魔法学院"
+        description: "你选择了魔法学院的道路"
+        event_type: "main"
+        activation_turn: 1
+        duration: 3
+        is_persistent: false
+        
+        required_tasks:
+          - task_id: "task_002a"
+            task_name: "学习魔法"
+            task_type: "training"
+            description: "在魔法学院学习基础魔法"
+            required_progress: 100
+            objectives:
+              - type: "training"
+                target: "magic_theory"
+                required: 50
+                current: 0
+        
+        # 事件触发时执行一次的效果脚本
+        event_script: |
+          # 魔法学院路径事件触发脚本 - 只执行一次
+          print("魔法学院路径事件触发！")
+          
+          # 设置世界状态
+          Global.globalVariables["magic_learned"] = true
+          
+          # 添加持续性效果到EventManager
+          var eventManager = GameManager.EventManager
+          if eventManager != null:
+              # 添加魔法学习效果
+              var magicEffect = {
+                  "effect_id": "char_magic_boost",
+                  "effect_type": "skill_boost",
+                  "duration": 3,
+                  "target": "char_0001",
+                  "skill": "magic_theory",
+                  "value": 20
+              }
+              eventManager.AddCharacterEffect(magicEffect)
+          
+          print("魔法学院路径持续性效果已添加到EventManager")
+          return true
+        
+        # 世界影响 - 通过Effect系统实现
+        world_effects: []
+        
+        # 角色影响 - 通过Effect系统实现
+        character_effects: []
+
+      - event_id: "test_event_002b"
+        event_name: "路径B - 战士公会"
+        description: "你选择了战士公会的道路"
+        event_type: "main"
+        activation_turn: 1
+        duration: 3
+        is_persistent: false
+        
+        required_tasks:
+          - task_id: "task_002b"
+            task_name: "战斗训练"
+            task_type: "training"
+            description: "在战士公会进行战斗训练"
+            required_progress: 100
+            objectives:
+              - type: "training"
+                target: "combat_skill"
+                required: 50
+                current: 0
+        
+        # 事件触发时执行一次的效果脚本
+        event_script: |
+          # 战士公会路径事件触发脚本 - 只执行一次
+          print("战士公会路径事件触发！")
+          
+          # 设置世界状态
+          Global.globalVariables["combat_learned"] = true
+          
+          # 添加持续性效果到EventManager
+          var eventManager = GameManager.EventManager
+          if eventManager != null:
+              # 添加战斗训练效果
+              var combatEffect = {
+                  "effect_id": "char_combat_boost",
+                  "effect_type": "skill_boost",
+                  "duration": 3,
+                  "target": "char_0001",
+                  "skill": "combat_skill",
+                  "value": 20
+              }
+              eventManager.AddCharacterEffect(combatEffect)
+          
+          print("战士公会路径持续性效果已添加到EventManager")
+          return true
+        
+        # 世界影响 - 通过Effect系统实现
+        world_effects: []
+        
+        # 角色影响 - 通过Effect系统实现
+        character_effects: []

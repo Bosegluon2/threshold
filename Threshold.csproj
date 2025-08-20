@@ -1,0 +1,24 @@
+<!--
+禁止Agent修改内容！
+-->
+
+<Project Sdk="Godot.NET.Sdk/4.4.1">
+  <PropertyGroup>
+    <!-- 目标 .NET 运行时版本 -->
+    <TargetFramework>net8.0</TargetFramework>
+    <!-- 启用 Godot 动态加载支持 -->
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <!-- 默认命名空间 -->
+    <RootNamespace>Threshold</RootNamespace>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <!-- 表达式解析库 -->
+    <PackageReference Include="DynamicExpresso.Core" Version="2.19.2" />
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="4.14.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="4.14.0" />
+    <!-- YAML 解析库 -->
+    <PackageReference Include="YamlDotNet" Version="16.3.0" />
+  </ItemGroup>
+</Project>

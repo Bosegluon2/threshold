@@ -1,0 +1,90 @@
+[gd_scene load_steps=6 format=3 uid="uid://btkxesbbndidq"]
+
+[ext_resource type="Script" uid="uid://dacuv770fw4mt" path="res://scenes/ui/rollover/Rollover.cs" id="1_ovgfy"]
+[ext_resource type="FontFile" uid="uid://c5jqt6q35qkq0" path="res://assets/fonts/LCD2N-3.ttf" id="2_5radk"]
+[ext_resource type="Shader" uid="uid://c2uj6kj7qyumd" path="res://assets/shaders/ChromaticAbberation.gdshader" id="3_dtsum"]
+
+[sub_resource type="Theme" id="Theme_5radk"]
+default_font = ExtResource("2_5radk")
+default_font_size = 695
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dnryx"]
+shader = ExtResource("3_dtsum")
+shader_parameter/levels = 500
+shader_parameter/_amount = 5.81
+shader_parameter/_aberrationCenter = Vector2(0.5, 0.5)
+shader_parameter/_centerFade = 0.0
+
+[node name="Rollover" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_5radk")
+script = ExtResource("1_ovgfy")
+
+[node name="Sep" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = -677.0
+offset_right = 76.0
+offset_bottom = 386.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_5radk")
+theme_override_font_sizes/font_size = 1000
+text = ":"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Timer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -664.0
+offset_top = -99.0
+offset_right = 664.0
+offset_bottom = 99.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Hour" type="Label" parent="Timer"]
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+text = "0"
+horizontal_alignment = 2
+
+[node name="Test" type="Label" parent="Timer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+horizontal_alignment = 2
+
+[node name="Minute" type="Label" parent="Timer"]
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+text = "12"
+
+[node name="Effect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_dnryx")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

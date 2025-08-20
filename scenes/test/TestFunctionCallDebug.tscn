@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqxqxqxqxqxv"]
+
+[ext_resource type="Script" path="res://scripts/test/FunctionCallDebugTest.cs" id="1_0"]
+
+[node name="TestFunctionCallDebug" type="Node"]
+
+[node name="FunctionCallDebugTest" type="Node" parent="."]
+script = ExtResource("1_0")

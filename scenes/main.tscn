@@ -1,0 +1,95 @@
+[gd_scene load_steps=13 format=3 uid="uid://bccut2de6ird3"]
+
+[ext_resource type="Script" uid="uid://cp8uju8m3jmsw" path="res://scenes/Main.cs" id="1_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://debt5roduqogr" path="res://scenes/ui/gui_panel_3d.tscn" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://ctj0ce87x4w1w" path="res://scripts/ui/CameraSwagger.cs" id="2_tbgi4"]
+[ext_resource type="FontFile" uid="uid://dtmhehlp8yaqc" path="res://assets/fonts/新愚公装甲宋B.ttf" id="3_sugp2"]
+[ext_resource type="Shader" uid="uid://c2uj6kj7qyumd" path="res://assets/shaders/ChromaticAbberation.gdshader" id="4_jyhfs"]
+[ext_resource type="Texture2D" uid="uid://bolvi8s4vplwr" path="res://assets/skybox/sky_04_2k.png" id="4_tefeu"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_o6xl0"]
+panorama = ExtResource("4_tefeu")
+
+[sub_resource type="Sky" id="Sky_tefeu"]
+sky_material = SubResource("PanoramaSkyMaterial_o6xl0")
+
+[sub_resource type="Environment" id="Environment_0wfyh"]
+background_mode = 2
+background_energy_multiplier = 0.0
+sky = SubResource("Sky_tefeu")
+ambient_light_source = 3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tbgi4"]
+shader = ExtResource("4_jyhfs")
+shader_parameter/levels = 100
+shader_parameter/_amount = 0.4
+shader_parameter/_aberrationCenter = Vector2(0.5, 0.5)
+shader_parameter/_centerFade = 0.154
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tefeu"]
+frequency = 0.1
+fractal_octaves = 2
+
+[sub_resource type="SphereMesh" id="SphereMesh_0wfyh"]
+radial_segments = 16
+rings = 8
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_tbgi4")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0wfyh")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
+material = SubResource("ShaderMaterial_tbgi4")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.750111, -0.661312, 0, 0.661312, 0.750111, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Node3D"]
+script = ExtResource("2_tbgi4")
+noiser = SubResource("FastNoiseLite_tefeu")
+
+[node name="GUIPanel3D" parent="Node3D" instance=ExtResource("2_0wfyh")]
+transform = Transform3D(0.96363, 0, 0.267238, 0, 1, 0, -0.267238, 0, 0.96363, 0, -0.66, -1.18)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D"]
+
+[node name="Mesh" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.0251975, -2)
+mesh = SubResource("SphereMesh_0wfyh")
+skeleton = NodePath("../..")
+
+[node name="Label3D" type="Label3D" parent="Node3D"]
+transform = Transform3D(0.985703, 0.00823067, 0.168288, 0, 0.998806, -0.0488498, -0.168489, 0.0481514, 0.984527, -1.307, 0.56, -1.214)
+pixel_size = 0.003
+text = "临界点"
+font = ExtResource("3_sugp2")
+font_size = 128
+horizontal_alignment = 0
+
+[node name="Label3D2" type="Label3D" parent="Node3D"]
+transform = Transform3D(0.985703, 0.00823067, 0.168288, 0, 0.998806, -0.0488498, -0.168489, 0.0481514, 0.984527, -1.031, 0.179, -0.986)
+pixel_size = 0.003
+text = "Threshold"
+font = ExtResource("3_sugp2")
+font_size = 64
+horizontal_alignment = 0

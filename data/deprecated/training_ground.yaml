@@ -1,0 +1,99 @@
+id: "training_ground"
+name: "训练场"
+description: "一个宽敞的户外训练场，地面铺着柔软的沙子，周围有各种训练器械和靶子。这里是战士们磨练技能的地方，空气中弥漫着汗水和泥土的气息。"
+type: "training"
+is_accessible: true
+parent_id: ""
+position: [100, 0, 100]
+capacity: 15
+level: 3
+tags: ["combat", "training", "outdoor", "physical", "warrior"]
+state: "normal"
+environment: "outdoor"
+can_get_time: true
+can_get_weather: true
+can_get_location: true
+can_get_atmosphere: true
+light_level: 1.0
+temperature: 22.0
+
+# 脚本驱动的效果 - 替代PlaceEffect
+on_agent_enter_script: |
+  # Agent进入训练场时执行的脚本
+  print("Agent进入训练场")
+  
+  # 检查Agent是否有战斗技能
+  if agent.Skills.ContainsKey("warfare") or agent.Skills.ContainsKey("dexterity"):
+      print("检测到战斗技能，应用训练增益")
+      
+      # 通过EventManager添加持续性效果
+      var eventManager = GameManager.EventManager
+      if eventManager != null:
+          # 战斗精神效果
+          var combatEffect = {
+              "effect_id": "combat_spirit",
+              "effect_type": "combat_boost",
+              "duration": 3,
+              "target": agent.Id,
+              "warfare_modifier": 0.1,
+              "dexterity_modifier": 0.08,
+              "combat_skill_bonus": 0.15
+          }
+          eventManager.AddCharacterEffect(combatEffect)
+          
+          # 户外环境效果
+          var outdoorEffect = {
+              "effect_id": "outdoor_environment",
+              "effect_type": "environmental_boost",
+              "duration": 3,
+              "target": agent.Id,
+              "perception_modifier": 0.05,
+              "adaptability_modifier": 0.08,
+              "nature_bonus": 0.1
+          }
+          eventManager.AddCharacterEffect(outdoorEffect)
+          
+          print("添加训练场增益效果")
+  
+  # 设置Agent状态
+  agent.Status["in_training_ground"] = true
+  agent.Status["training_start_time"] = Global.globalVariables.get("current_turn", 0)
+  
+  return true
+
+on_agent_leave_script: |
+  # Agent离开训练场时执行的脚本
+  print("Agent离开训练场")
+  
+  # 移除训练场相关状态
+  if agent.Status.ContainsKey("in_training_ground"):
+      agent.Status.Remove("in_training_ground")
+  
+  # 计算训练时间并记录
+  var startTime = agent.Status.get("training_start_time", 0)
+  var currentTurn = Global.globalVariables.get("current_turn", 0)
+  var trainingDuration = currentTurn - startTime
+  
+  if trainingDuration > 0:
+      # 记录训练历史
+      var trainingHistory = Global.globalVariables.get("training_history", {})
+      if not trainingHistory.has(agent.Id):
+          trainingHistory[agent.Id] = {}
+      
+      var agentHistory = trainingHistory[agent.Id]
+      var today = Global.globalVariables.get("current_date", "unknown")
+      if not agentHistory.has(today):
+          agentHistory[today] = 0
+      
+      agentHistory[today] += trainingDuration
+      trainingHistory[agent.Id] = agentHistory
+      Global.globalVariables["training_history"] = trainingHistory
+      
+      print("Agent训练时长: ", trainingDuration, " 回合")
+      print("今日总训练时长: ", agentHistory[today], " 回合")
+  
+  # 清理临时状态
+  if agent.Status.ContainsKey("training_start_time"):
+      agent.Status.Remove("training_start_time")
+  
+  return true

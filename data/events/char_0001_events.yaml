@@ -1,0 +1,97 @@
+# 艾莉娅个人事件树
+event_tree:
+  tree_id: "char_0001_events"
+  tree_name: "艾莉娅的个人故事"
+  tree_type: "character"
+  priority: 80
+  is_required: false
+  
+  # 根事件
+  root_event:
+    event_id: "char_0001_daily_magic"
+    event_name: "日常魔法练习"
+    description: "艾莉娅每天都会练习魔法"
+    type: "daily"
+    activation_turn: 1
+    expiration_turn: 120
+    duration: 120
+    is_persistent: true
+    
+    # 激活条件
+    activation_conditions:
+      - type: "script"
+        condition_id: "char_0001_available"
+        description: "检查艾莉娅是否可以进行魔法练习"
+        condition_script: |
+          # 检查艾莉娅的状态
+          var charManager = GameManager.CharacterManager
+          if charManager != null:
+              var alyia = charManager.GetCharacterById("char_0001")
+              if alyia != null:
+                  var energy = alyia.CurrentEnergy
+                  var health = alyia.CurrentHealth
+                  var mood = alyia.Status.get("mood", 50)
+                  
+                  print("检查艾莉娅状态：能量=", energy, " 生命=", health, " 心情=", mood)
+                  
+                  # 能量充足、生命值正常、心情良好时可以进行练习
+                  return energy >= 20 and health >= 30 and mood >= 40
+    
+    # 循环任务
+    cyclic_tasks:
+      - task_id: "daily_magic_practice"
+        task_name: "魔法练习"
+        task_type: "training"
+        description: "练习魔法技能"
+        required_progress: 100
+        vote_weight: 1.0
+        cooldown: 1
+        objectives:
+          - type: "use_skill"
+            target: "fire_ball"
+            required: 5
+        rewards:
+          - type: "skill_exp"
+            target: "fire_ball"
+            value: 10
+            quantity: 1
+    
+    # 事件触发时执行一次的效果脚本
+    event_script: |
+      # 日常魔法练习事件触发脚本 - 只执行一次
+      print("日常魔法练习事件触发！")
+      
+      # 添加持续性效果到EventManager
+      var eventManager = GameManager.EventManager
+      if eventManager != null:
+          # 添加魔法能量波动效果
+          var energyEffect = {
+              "effect_id": "magic_energy_fluctuation",
+              "effect_type": "atmosphere",
+              "duration": 120,
+              "target": "current_place",
+              "intensity": 0.1,
+              "duration": 1
+          }
+          eventManager.AddWorldEffect(energyEffect)
+          
+          # 添加魔法技能提升效果
+          var skillEffect = {
+              "effect_id": "char_0001_magic_improvement",
+              "effect_type": "skill_boost",
+              "duration": 120,
+              "target": "char_0001",
+              "skill": "fire_ball",
+              "value": 1,
+              "energy_cost": 15
+          }
+          eventManager.AddCharacterEffect(skillEffect)
+      
+      print("日常魔法练习持续性效果已添加到EventManager")
+      return true
+    
+    # 世界影响 - 通过Effect系统实现
+    world_effects: []
+    
+    # 角色影响 - 通过Effect系统实现
+    character_effects: []

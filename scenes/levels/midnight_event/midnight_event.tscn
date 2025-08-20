@@ -1,0 +1,97 @@
+[gd_scene load_steps=10 format=3 uid="uid://dfcajivdrjpfs"]
+
+[ext_resource type="Script" uid="uid://cprkra0s80m0q" path="res://scenes/levels/midnight_event/MidnightEvent.cs" id="1_5d1aj"]
+[ext_resource type="Shader" uid="uid://c2uj6kj7qyumd" path="res://assets/shaders/ChromaticAbberation.gdshader" id="2_w3lnx"]
+[ext_resource type="FontFile" uid="uid://cets22g28cbxd" path="res://assets/fonts/匯文仿宋.ttf" id="3_q1f4e"]
+[ext_resource type="FontFile" uid="uid://bmyhtc6ydpyfd" path="res://assets/fonts/匯文明朝體GBK.ttf" id="4_ortef"]
+[ext_resource type="FontFile" uid="uid://dugk3ric8luo5" path="res://assets/fonts/匯文正楷.ttf" id="5_eplib"]
+[ext_resource type="FontFile" uid="uid://b08kqqjj5xjw0" path="res://assets/fonts/匯文港黑.ttf" id="6_fvram"]
+[ext_resource type="FontFile" uid="uid://m72pj58bd5sx" path="res://assets/fonts/新叶念体.otf" id="7_fvram"]
+[ext_resource type="FontFile" uid="uid://dtmhehlp8yaqc" path="res://assets/fonts/新愚公装甲宋B.ttf" id="8_nuusl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7rfbm"]
+shader = ExtResource("2_w3lnx")
+shader_parameter/levels = 500
+shader_parameter/_amount = 1.29
+shader_parameter/_aberrationCenter = Vector2(0.5, 0.5)
+shader_parameter/_centerFade = 0.154
+
+[node name="MidnightEvent" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5d1aj")
+
+[node name="V" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Message" type="HFlowContainer" parent="V"]
+layout_mode = 2
+
+[node name="StatusMessage" type="HFlowContainer" parent="V"]
+layout_mode = 2
+
+[node name="Fonts" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="3" type="Label" parent="Fonts"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_q1f4e")
+theme_override_font_sizes/font_size = 96
+text = "你好"
+
+[node name="4" type="Label" parent="Fonts"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ortef")
+theme_override_font_sizes/font_size = 96
+text = "你好"
+
+[node name="5" type="Label" parent="Fonts"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_eplib")
+theme_override_font_sizes/font_size = 96
+text = "你好"
+
+[node name="6" type="Label" parent="Fonts"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_fvram")
+theme_override_font_sizes/font_size = 96
+text = "你好"
+
+[node name="7" type="Label" parent="Fonts"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_fvram")
+theme_override_font_sizes/font_size = 96
+text = "你好"
+
+[node name="8" type="Label" parent="Fonts"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_nuusl")
+theme_override_font_sizes/font_size = 96
+text = "你好"
+
+[node name="Effect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_7rfbm")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -1,0 +1,28 @@
+id: "t3_zero_point_fissure"
+name: "T3区零点能裂缝"
+description: "位于T3钻井平台附近的高能量异常裂缝，持续释放零点能辐射与不稳定的时空波动。裂缝周围空气呈现微弱蓝白色辉光，并伴随低频共鸣。靠近时会感到轻微的失重感与方向感错乱。由于裂缝能量极高，已在周围设置多道防护屏障与监控设备，但仍禁止非授权人员靠近。"
+type: "anomaly"
+is_accessible: false
+parent_id: ""
+position: [52, 14, 42]
+capacity: 0
+level: 5
+tags: ["anomaly", "zero_point_energy", "hazard"]
+state: "unstable"
+environment: "outdoor"
+can_get_time: true
+can_get_weather: true
+can_get_location: true
+can_get_atmosphere: true
+light_level: 0.9
+temperature: -40.0
+
+on_agent_enter_script: |
+  // 检查是否有高危区域进入许可
+  if (!agent.hasPermission("anomaly_access_level_5")) {
+    return false;
+  }
+  return true
+
+on_agent_leave_script: |
+  return true

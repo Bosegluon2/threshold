@@ -1,0 +1,24 @@
+id: "prometheus_rest_area"
+name: "普罗米修斯观测站休息区"
+description: "位于观测站核心区旁的生活休息区域，五位主要成员在此放松、交流与恢复体力。墙壁由隔热复合板与异常能量屏障加固，内部铺设了温暖的毛毯与柔和光源，以抵御外部刺骨的寒风与不稳定的时空波动。角落里摆放着几件从北极旧探险站带回的物品，提醒人们这里仍然属于地球的一隅。"
+type: "living"
+is_accessible: true
+parent_id: ""
+position: [0, 5, 5]
+capacity: 8
+level: 0
+tags: ["rest", "social", "crew", "safe_zone"]
+state: "normal"
+environment: "indoor"
+can_get_time: true
+can_get_weather: false
+can_get_location: true
+can_get_atmosphere: true
+light_level: 0.7
+temperature: 22.0
+
+on_agent_enter_script: |
+  return true
+
+on_agent_leave_script: |
+  return true

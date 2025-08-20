@@ -1,0 +1,38 @@
+id: "fire_ball"
+name: "火球术"
+description: "发射一个火球攻击敌人，造成火焰伤害"
+icon: "res://assets/icons/skills/fire_ball.png"
+category: "combat"
+type: "offensive"
+element: "fire"
+base_level: 1
+max_level: 10
+base_damage: 25
+damage_scaling: 5  # 每级增加5点伤害
+energy_cost: 15
+cooldown: 3.0  # 3秒冷却时间
+range: 20.0
+area_of_effect: 3.0
+requirements:
+  - type: "level"
+    value: 1
+  - type: "attribute"
+    name: "base_reasoning"
+    value: 5
+effects:
+  - type: "damage"
+    value: "base_damage"
+    scaling: "damage_scaling"
+  - type: "burn"
+    chance: 30
+    duration: 5
+    damage_per_tick: 3
+upgrades:
+  - level: 3
+    effect: "增加燃烧几率到50%"
+  - level: 5
+    effect: "减少冷却时间到2.5秒"
+  - level: 7
+    effect: "增加火球爆炸范围"
+  - level: 10
+    effect: "火球可以穿透敌人"

@@ -1,0 +1,24 @@
+id: "t2_drill_platform_ruins"
+name: "T-2钻井平台残骸"
+description: "编号T2的深海钻井平台，位于普罗米修斯基地外海作业区。零点能裂痕在一次作业高峰期毫无征兆地切开了平台核心，钢骨结构如同被无形之刃击断，整个平台自中心倾覆，一部分沉入深渊，一部分依旧耸立在海面上，发出金属与海浪的悲鸣。残骸附近海流混乱，裂痕释放的能量干扰了所有导航与通信信号，成为一片永久的海上禁区。"
+type: "ruins"
+is_accessible: false
+parent_id: ""
+position: [-80, -100, 0]
+capacity: 0
+level: 2
+tags: ["ruins", "offshore", "danger_zone", "industrial"]
+state: "derelict"
+environment: "offshore"
+can_get_time: true
+can_get_weather: true
+can_get_location: true
+can_get_atmosphere: true
+light_level: 0.2
+temperature: -30.0
+
+on_agent_enter_script: |
+  return true
+
+on_agent_leave_script: |
+  return true

@@ -1,0 +1,24 @@
+id: "k7_listening_post"
+name: "K7监听站"
+description: "建于极地高地的一座废弃监听站，曾用于截收和分析海上通讯。主塔天线已被暴风吹折，内部的加密终端仍在间歇闪烁，似乎保存着未解密的数据日志。"
+type: "ruins"
+is_accessible: false
+parent_id: ""
+position: [-25, -85, 0]
+capacity: 0
+level: 2
+tags: ["ruins", "military", "danger_zone", "intel"]
+state: "derelict"
+environment: "icefield"
+can_get_time: true
+can_get_weather: true
+can_get_location: true
+can_get_atmosphere: true
+light_level: 0.4
+temperature: -48.0
+
+on_agent_enter_script: |
+  return true
+
+on_agent_leave_script: |
+  return true

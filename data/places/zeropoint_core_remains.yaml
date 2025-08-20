@@ -1,0 +1,24 @@
+id: "zeropoint_core_remains"
+name: "零点能核心残骸"
+description: "一次零点能实验失控后遗留的反应核心残骸，嵌入在冰原裂谷之中。核心周围的冰层呈现不自然的透明蓝色，辐射区足以瞬间击穿防护服。偶尔会有能量火花从裂缝中喷出。"
+type: "ruins"
+is_accessible: false
+parent_id: ""
+position: [-70, -110, 0]
+capacity: 0
+level: 4
+tags: ["ruins", "research", "danger_zone", "energy"]
+state: "derelict"
+environment: "icefield"
+can_get_time: true
+can_get_weather: true
+can_get_location: true
+can_get_atmosphere: false
+light_level: 0.2
+temperature: -55.0
+
+on_agent_enter_script: |
+  return true
+
+on_agent_leave_script: |
+  return true

@@ -1,0 +1,236 @@
+[gd_scene load_steps=15 format=3 uid="uid://c1ug73bdrkpxy"]
+
+[ext_resource type="Script" uid="uid://cya5yke2bs2tn" path="res://scenes/levels/assign_misson/MissionUi.cs" id="1_1ad3h"]
+[ext_resource type="FontFile" uid="uid://dtmhehlp8yaqc" path="res://assets/fonts/新愚公装甲宋B.ttf" id="1_8jf56"]
+[ext_resource type="Texture2D" uid="uid://ce5h1a8celvk1" path="res://data/image/characters/dr_cw/idle.png" id="2_1da6r"]
+[ext_resource type="Script" uid="uid://dg0j8jeb0vcj3" path="res://scenes/levels/assign_misson/CharacterButton.cs" id="2_4elkl"]
+[ext_resource type="PackedScene" uid="uid://bqxqxqxqxqxqx" path="res://scenes/ui/mission_assignment/MissionAssignmentUI.tscn" id="5_wpufy"]
+[ext_resource type="PackedScene" uid="uid://bd5cab8k2jeni" path="res://scenes/ui/components/animated_button/AnimatedButton.tscn" id="6_bbeak"]
+[ext_resource type="Shader" uid="uid://c2uj6kj7qyumd" path="res://assets/shaders/ChromaticAbberation.gdshader" id="7_4elkl"]
+
+[sub_resource type="Theme" id="Theme_wpufy"]
+default_font = ExtResource("1_8jf56")
+default_font_size = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8jf56"]
+bg_color = Color(0.6, 0.6, 0.6, 0.635294)
+
+[sub_resource type="FontVariation" id="FontVariation_8jf56"]
+base_font = ExtResource("1_8jf56")
+variation_transform = Transform2D(1, 0.5, 0, 1, 0, 0)
+
+[sub_resource type="Theme" id="Theme_bbeak"]
+default_font_size = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wpufy"]
+bg_color = Color(0, 0, 0, 1)
+skew = Vector2(0.68, 0)
+expand_margin_top = 100.0
+expand_margin_right = 50.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bbeak"]
+bg_color = Color(0, 0, 0, 1)
+skew = Vector2(-0.68, 0)
+expand_margin_top = 8.0
+expand_margin_right = 50.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_77t6o"]
+shader = ExtResource("7_4elkl")
+shader_parameter/levels = 500
+shader_parameter/_amount = 1.0
+shader_parameter/_aberrationCenter = Vector2(0.5, 0.5)
+shader_parameter/_centerFade = 0.154
+
+[node name="AssignMission" type="Node3D"]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_wpufy")
+script = ExtResource("1_1ad3h")
+
+[node name="S" type="SplitContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 930
+
+[node name="S" type="SplitContainer" parent="UI/S"]
+layout_mode = 2
+split_offset = 390
+
+[node name="S" type="ScrollContainer" parent="UI/S/S"]
+layout_mode = 2
+
+[node name="H" type="HBoxContainer" parent="UI/S/S/S"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="Button" type="Button" parent="UI/S/S/S/H"]
+clip_contents = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_styles/disabled = SubResource("StyleBoxFlat_8jf56")
+button_mask = 5
+flat = true
+script = ExtResource("2_4elkl")
+
+[node name="Character" type="TextureRect" parent="UI/S/S/S/H/Button"]
+show_behind_parent = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_1da6r")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Talk" type="Panel" parent="UI/S/S"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Split" type="SplitContainer" parent="UI/S/S/Talk"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 840
+vertical = true
+
+[node name="TalkPanel" type="Panel" parent="UI/S/S/Talk/Split"]
+layout_mode = 2
+
+[node name="V" type="VBoxContainer" parent="UI/S/S/Talk/Split/TalkPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CharacterStatus" type="Label" parent="UI/S/S/Talk/Split/TalkPanel/V"]
+layout_mode = 2
+text = "asdadssad"
+
+[node name="S" type="ScrollContainer" parent="UI/S/S/Talk/Split/TalkPanel/V"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Content" type="VBoxContainer" parent="UI/S/S/Talk/Split/TalkPanel/V/S"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Assistant" type="RichTextLabel" parent="UI/S/S/Talk/Split/TalkPanel/V/S/Content"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("1_8jf56")
+theme_override_fonts/mono_font = ExtResource("1_8jf56")
+theme_override_fonts/italics_font = SubResource("FontVariation_8jf56")
+theme_override_fonts/bold_italics_font = SubResource("FontVariation_8jf56")
+theme_override_fonts/bold_font = ExtResource("1_8jf56")
+theme_override_font_sizes/bold_italics_font_size = 40
+theme_override_font_sizes/italics_font_size = 40
+theme_override_font_sizes/mono_font_size = 40
+theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/bold_font_size = 40
+bbcode_enabled = true
+text = "asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd"
+fit_content = true
+
+[node name="Info" type="Label" parent="UI/S/S/Talk/Split/TalkPanel/V/S/Content"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "asdasd"
+
+[node name="User" type="Label" parent="UI/S/S/Talk/Split/TalkPanel/V/S/Content"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 40
+text = "asdasd"
+
+[node name="TextEdit" type="TextEdit" parent="UI/S/S/Talk/Split"]
+layout_mode = 2
+
+[node name="H" type="HBoxContainer" parent="UI/S/S/Talk/Split/TextEdit"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -58.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Send" type="Button" parent="UI/S/S/Talk/Split/TextEdit/H"]
+layout_mode = 2
+text = "发送消息"
+flat = true
+
+[node name="Assign" type="Button" parent="UI/S/S/Talk/Split/TextEdit/H"]
+layout_mode = 2
+text = "加入任务"
+flat = true
+
+[node name="MissionAssignmentUI" parent="UI/S" instance=ExtResource("5_wpufy")]
+layout_mode = 2
+theme = SubResource("Theme_bbeak")
+
+[node name="Info" type="Label" parent="UI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 50.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_wpufy")
+text = "晨间任务分布"
+
+[node name="Label2" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -50.0
+offset_right = 300.0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_bbeak")
+text = "当前行动能力：3"
+
+[node name="Next" parent="UI" instance=ExtResource("6_bbeak")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -464.0
+offset_top = -58.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 200
+text = "下一回合"
+
+[node name="Effect" type="ColorRect" parent="UI"]
+material = SubResource("ShaderMaterial_77t6o")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

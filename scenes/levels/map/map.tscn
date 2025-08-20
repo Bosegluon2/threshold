@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://becv13fru3vco"]
+
+[ext_resource type="Script" uid="uid://cieqjpo1allw7" path="res://scenes/levels/map/Map.cs" id="1_2cthb"]
+[ext_resource type="Script" uid="uid://c6bxv3y57jtyb" path="res://scripts/controller/CameraNavigator.cs" id="1_qagll"]
+
+[sub_resource type="Environment" id="Environment_03hf8"]
+background_mode = 1
+background_color = Color(1, 1, 1, 1)
+
+[node name="Map" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+
+[node name="Map" type="Node3D" parent="."]
+script = ExtResource("1_2cthb")
+
+[node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0)
+script = ExtResource("1_qagll")
+navigateRadius = 50.0
+farDistance = 50.0
+
+[node name="Camera" type="Camera3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 14)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_03hf8")

@@ -1,0 +1,30 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://dswt1oiuqlhey"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gv4ux"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m624h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_emcwq"]
+skew = Vector2(0.3, 0)
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vtvgc"]
+bg_color = Color(0.101961, 0.101961, 0.101961, 1)
+skew = Vector2(0.3, 0)
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aj56i"]
+bg_color = Color(0, 0, 0, 1)
+skew = Vector2(0.3, 0)
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+
+[resource]
+default_font_size = 60
+Button/styles/disabled = SubResource("StyleBoxEmpty_gv4ux")
+Button/styles/focus = SubResource("StyleBoxEmpty_m624h")
+Button/styles/hover = SubResource("StyleBoxFlat_emcwq")
+Button/styles/normal = SubResource("StyleBoxFlat_vtvgc")
+Button/styles/pressed = SubResource("StyleBoxFlat_aj56i")

@@ -1,0 +1,24 @@
+id: "prometheus_generator_unit"
+name: "普罗米修斯观测站发电机组"
+description: "位于观测站西北方向的独立供电设施，由三台零点能量-柴油混合发电机组成，确保在异常时空波动中仍能稳定供电。外部有厚重的隔音与防寒外壳，并由一层能量护罩防止雪尘与微粒侵入。发电机组周围设有警戒区，禁止非授权人员靠近。"
+type: "power_generator"
+is_accessible: false
+parent_id: ""
+position: [-15, 3, 0]
+capacity: 4
+level: 0
+tags: ["power", "infrastructure", "maintenance"]
+state: "operational"
+environment: "outdoor"
+can_get_time: true
+can_get_weather: true
+can_get_location: true
+can_get_atmosphere: true
+light_level: 0.5
+temperature: -15.0
+
+on_agent_enter_script: |
+  return true;
+
+on_agent_leave_script: |
+  return true

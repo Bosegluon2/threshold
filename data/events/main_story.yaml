@@ -1,0 +1,297 @@
+# 主线事件树配置
+event_tree:
+  tree_id: "main_story"
+  tree_name: "主线故事"
+  tree_type: "main"
+  priority: 100
+  is_required: true
+  
+  # 根事件 - 触发整个主线剧情
+  root_event:
+    event_id: "main_001"
+    event_name: "魔法学院的秘密"
+    description: "艾莉娅发现魔法学院隐藏着一个古老的秘密"
+    type: "main"
+    activation_turn: 10
+    expiration_turn: 50
+    duration: 40
+    is_persistent: false
+    
+    # 必需任务
+    required_tasks:
+      - task_id: "main_001_task_01"
+        task_name: "探索图书馆"
+        task_type: "exploration"
+        description: "在魔法图书馆中寻找线索"
+        required_progress: 100
+        vote_weight: 1.0
+        cooldown: 0
+        objectives:
+          - type: "visit_place"
+            target: "magic_library"
+            required: 1
+        rewards:
+          - type: "knowledge"
+            target: "magic_theory"
+            value: 50
+            quantity: 1
+          - type: "relationship"
+            target: "char_0001"
+            value: 10
+            quantity: 1
+    
+    # 分支选择 - 影响后续剧情发展
+    branches:
+      - branch_id: "good_path"
+        branch_name: "善良路线"
+        description: "选择善良的道路"
+        type: "manual"
+        probability: 0.6
+        enable_conditions:
+          - condition_id: "cond_good_available"
+            type: "script"
+            description: "检查善良路径是否可用"
+            condition_script: |
+              # 检查善良路径是否可用
+              var goodAvailable = Global.globalVariables.get("good_path_available", false)
+              return goodAvailable == true
+        next_events:
+          - event_id: "main_002_good"
+            event_name: "善良的选择"
+            activation_delay: 5
+    
+      - branch_id: "evil_path"
+        branch_name: "邪恶路线"
+        description: "选择黑暗的道路"
+        type: "manual"
+        probability: 0.4
+        enable_conditions:
+          - condition_id: "cond_evil_available"
+            type: "script"
+            description: "检查邪恶路径是否可用"
+            condition_script: |
+              # 检查邪恶路径是否可用
+              var evilAvailable = Global.globalVariables.get("evil_path_available", false)
+              return evilAvailable == true
+        next_events:
+          - event_id: "main_002_evil"
+            event_name: "黑暗的诱惑"
+            activation_delay: 3
+    
+    # 完成条件
+    completion_conditions:
+      - type: "script"
+        condition_id: "main_001_completion"
+        description: "检查主线任务是否完成"
+        condition_script: |
+          # 检查任务完成状态
+          var taskManager = GameManager.TaskManager
+          if taskManager != null:
+              var task = taskManager.GetTask("main_001_task_01")
+              if task != null:
+                  return task.Status == "completed"
+          return false
+    
+    # 事件触发时执行一次的效果脚本
+    event_script: |
+      # 主线事件触发脚本 - 只执行一次
+      print("主线事件：魔法学院的秘密触发！")
+      
+      # 设置世界状态
+      Global.globalVariables["magic_world_state"] = "revealed"
+      
+      # 添加持续性效果到EventManager
+      var eventManager = GameManager.EventManager
+      if eventManager != null:
+          # 添加世界状态效果
+          var worldEffect = {
+              "effect_id": "world_magic_revealed",
+              "effect_type": "world_state",
+              "duration": 40,
+              "target": "world:magic_world",
+              "state": "magic_world_state",
+              "value": "revealed"
+          }
+          eventManager.AddWorldEffect(worldEffect)
+          
+          # 添加角色技能提升效果
+          var charEffect = {
+              "effect_id": "char_knowledge_boost",
+              "effect_type": "skill_boost",
+              "duration": 40,
+              "target": "char_0001",
+              "skill": "magic_theory",
+              "value": 10
+          }
+          eventManager.AddCharacterEffect(charEffect)
+      
+      print("主线事件持续性效果已添加到EventManager")
+      return true
+    
+    # 世界影响 - 通过Effect系统实现
+    world_effects: []
+    
+    # 角色影响 - 通过Effect系统实现
+    character_effects: []
+  
+  # 其他事件节点
+  events:
+    # 善良路线分支事件
+    - event_id: "main_002_good"
+      event_name: "善良的选择"
+      description: "艾莉娅选择帮助学院保护秘密"
+      type: "main"
+      activation_turn: 15
+      expiration_turn: 60
+      duration: 45
+      is_persistent: false
+      
+      required_tasks:
+        - task_id: "main_002_good_task_01"
+          task_name: "保护学院"
+          task_type: "combat"
+          description: "与入侵者战斗保护学院"
+          required_progress: 100
+          vote_weight: 1.0
+          cooldown: 0
+          objectives:
+            - type: "defeat_enemy"
+              target: "dark_mage"
+              required: 1
+          rewards:
+            - type: "reputation"
+              target: "magic_academy"
+              value: 100
+              quantity: 1
+      
+      branches:
+        - branch_id: "good_ending"
+          branch_name: "英雄结局"
+          description: "成为学院的英雄"
+          probability: 1.0
+          next_events:
+            - event_id: "main_003_good_ending"
+              event_name: "英雄的荣耀"
+              activation_delay: 2
+      
+      completion_conditions:
+        - type: "task_completion"
+          target: "main_002_good_task_01"
+          required: true
+    
+    # 邪恶路线分支事件
+    - event_id: "main_002_evil"
+      event_name: "黑暗的诱惑"
+      description: "艾莉娅被黑暗力量诱惑"
+      type: "main"
+      activation_turn: 13
+      expiration_turn: 55
+      duration: 42
+      is_persistent: false
+      
+      required_tasks:
+        - task_id: "main_002_evil_task_01"
+          task_name: "背叛学院"
+          task_type: "dialogue"
+          description: "与黑暗势力达成协议"
+          required_progress: 100
+          vote_weight: 1.0
+          cooldown: 0
+          objectives:
+            - type: "make_choice"
+              target: "dark_pact"
+              required: 1
+          rewards:
+            - type: "dark_power"
+              target: "char_0001"
+              value: 50
+              quantity: 1
+      
+      branches:
+        - branch_id: "evil_ending"
+          branch_name: "黑暗结局"
+          description: "堕入黑暗"
+          probability: 1.0
+          next_events:
+            - event_id: "main_003_evil_ending"
+              event_name: "黑暗的代价"
+              activation_delay: 2
+      
+      completion_conditions:
+        - type: "task_completion"
+          target: "main_002_evil_task_01"
+          required: true
+    
+    # 善良结局事件
+    - event_id: "main_003_good_ending"
+      event_name: "英雄的荣耀"
+      description: "艾莉娅成为学院的英雄，获得荣耀"
+      type: "main"
+      activation_turn: 17
+      expiration_turn: 120
+      duration: 103
+      is_persistent: false
+      
+      required_tasks:
+        - task_id: "main_003_good_ending_task_01"
+          task_name: "接受荣誉"
+          task_type: "dialogue"
+          description: "参加学院的荣誉仪式"
+          required_progress: 100
+          vote_weight: 1.0
+          cooldown: 0
+          objectives:
+            - type: "attend_ceremony"
+              target: "honor_ceremony"
+              required: 1
+          rewards:
+            - type: "title"
+              target: "char_0001"
+              value: "学院英雄"
+              quantity: 1
+      
+      # 这是善良路线的结束节点
+      is_ending: true
+      ending_type: "good"
+      
+      completion_conditions:
+        - type: "task_completion"
+          target: "main_003_good_ending_task_01"
+          required: true
+    
+    # 邪恶结局事件
+    - event_id: "main_003_evil_ending"
+      event_name: "黑暗的代价"
+      description: "艾莉娅为黑暗力量付出代价"
+      type: "main"
+      activation_turn: 15
+      expiration_turn: 120
+      duration: 105
+      is_persistent: false
+      
+      required_tasks:
+        - task_id: "main_003_evil_ending_task_01"
+          task_name: "承受代价"
+          task_type: "combat"
+          description: "与内心的黑暗战斗"
+          required_progress: 100
+          vote_weight: 1.0
+          cooldown: 0
+          objectives:
+            - type: "internal_conflict"
+              target: "dark_side"
+              required: 1
+          rewards:
+            - type: "dark_mastery"
+              target: "char_0001"
+              value: 100
+              quantity: 1
+      
+      # 这是邪恶路线的结束节点
+      is_ending: true
+      ending_type: "evil"
+      
+      completion_conditions:
+        - type: "task_completion"
+          target: "main_003_evil_ending_task_01"
+          required: true

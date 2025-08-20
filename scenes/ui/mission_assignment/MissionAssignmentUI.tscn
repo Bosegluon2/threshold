@@ -1,0 +1,203 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqxqxqxqxqxqx"]
+
+[ext_resource type="Script" uid="uid://bl684f7a5anmd" path="res://scenes/ui/mission_assignment/MissionAssignmentUI.cs" id="1_mission_assignment_ui"]
+
+[node name="MissionAssignmentUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mission_assignment_ui")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="Title" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "任务分配"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MissionSetupSection" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MissionSetupTitle" type="Label" parent="ScrollContainer/VBoxContainer/MissionSetupSection"]
+layout_mode = 2
+text = "任务设置"
+horizontal_alignment = 1
+
+[node name="MissionNameContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/MissionSetupSection"]
+layout_mode = 2
+
+[node name="MissionNameLabel" type="Label" parent="ScrollContainer/VBoxContainer/MissionSetupSection/MissionNameContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "任务名称:"
+
+[node name="MissionNameInput" type="LineEdit" parent="ScrollContainer/VBoxContainer/MissionSetupSection/MissionNameContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "输入任务名称"
+
+[node name="MissionTypeContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/MissionSetupSection"]
+layout_mode = 2
+
+[node name="MissionTypeLabel" type="Label" parent="ScrollContainer/VBoxContainer/MissionSetupSection/MissionTypeContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "任务类型:"
+
+[node name="MissionTypeOption" type="OptionButton" parent="ScrollContainer/VBoxContainer/MissionSetupSection/MissionTypeContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator2" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LocationSection" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LocationTitle" type="Label" parent="ScrollContainer/VBoxContainer/LocationSection"]
+layout_mode = 2
+text = "地点选择"
+horizontal_alignment = 1
+
+[node name="BaseLocationContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/LocationSection"]
+layout_mode = 2
+
+[node name="BaseLocationLabel" type="Label" parent="ScrollContainer/VBoxContainer/LocationSection/BaseLocationContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "出发地点:"
+
+[node name="BaseLocationOption" type="OptionButton" parent="ScrollContainer/VBoxContainer/LocationSection/BaseLocationContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TargetLocationContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/LocationSection"]
+layout_mode = 2
+
+[node name="TargetLocationLabel" type="Label" parent="ScrollContainer/VBoxContainer/LocationSection/TargetLocationContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "目标地点:"
+
+[node name="TargetLocationOption" type="OptionButton" parent="ScrollContainer/VBoxContainer/LocationSection/TargetLocationContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator3" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ResourceSection" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ResourceTitle" type="Label" parent="ScrollContainer/VBoxContainer/ResourceSection"]
+layout_mode = 2
+text = "资源补给"
+horizontal_alignment = 1
+
+[node name="FoodSupplyContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/ResourceSection"]
+layout_mode = 2
+
+[node name="FoodSupplyLabel" type="Label" parent="ScrollContainer/VBoxContainer/ResourceSection/FoodSupplyContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "食物补给:"
+
+[node name="FoodSupplySlider" type="HSlider" parent="ScrollContainer/VBoxContainer/ResourceSection/FoodSupplyContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FoodSupplyValue" type="Label" parent="ScrollContainer/VBoxContainer/ResourceSection/FoodSupplyContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "0"
+
+[node name="WaterSupplyContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/ResourceSection"]
+layout_mode = 2
+
+[node name="WaterSupplyLabel" type="Label" parent="ScrollContainer/VBoxContainer/ResourceSection/WaterSupplyContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "水源补给:"
+
+[node name="WaterSupplySlider" type="HSlider" parent="ScrollContainer/VBoxContainer/ResourceSection/WaterSupplyContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="WaterSupplyValue" type="Label" parent="ScrollContainer/VBoxContainer/ResourceSection/WaterSupplyContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "0"
+
+[node name="HSeparator4" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AgentSection" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AgentTitle" type="Label" parent="ScrollContainer/VBoxContainer/AgentSection"]
+layout_mode = 2
+text = "人员分配"
+horizontal_alignment = 1
+
+[node name="SelectedAgentsLabel" type="Label" parent="ScrollContainer/VBoxContainer/AgentSection"]
+layout_mode = 2
+text = "已选人员:"
+
+[node name="SelectedAgentsList" type="ItemList" parent="ScrollContainer/VBoxContainer/AgentSection"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AgentButtonsContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/AgentSection"]
+layout_mode = 2
+
+[node name="RemoveAgentButton" type="Button" parent="ScrollContainer/VBoxContainer/AgentSection/AgentButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "移除人员"
+
+[node name="HSeparator5" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ActionSection" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SubmitMissionButton" type="Button" parent="ScrollContainer/VBoxContainer/ActionSection"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "提交任务"
+
+[node name="ClearButton" type="Button" parent="ScrollContainer/VBoxContainer/ActionSection"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "清除数据"
+
+[node name="Message" type="RichTextLabel" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true

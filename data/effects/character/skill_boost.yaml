@@ -1,0 +1,33 @@
+# 技能提升效果
+character_effect:
+  effect_id: "skill_boost"
+  effect_name: "技能提升"
+  effect_type: "skill_modification"
+  description: "提升指定角色的技能等级"
+  
+  # 效果参数
+  parameters:
+    skill_id: "string"      # 目标技能ID
+    boost_value: "int"      # 提升数值
+    duration: "int"         # 持续时间（回合）
+    is_permanent: "bool"    # 是否永久效果
+  
+  # 应用逻辑
+  application:
+    target_type: "character"  # character/group/all
+    target_filter: "string"   # 目标筛选条件
+    condition: "string"       # 应用条件
+  
+  # 效果实现
+  implementation:
+    method: "add_skill_exp"
+    parameters:
+      - "skill_id"
+      - "boost_value"
+  
+  # 移除逻辑
+  removal:
+    method: "remove_skill_boost"
+    conditions:
+      - type: "duration_expired"
+      - type: "manual_removal"

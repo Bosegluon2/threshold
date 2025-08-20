@@ -1,0 +1,24 @@
+id: "sunken_supply_ship"
+name: "沉没的补给舰"
+description: "一艘大型补给舰在暴风雪中触礁搁浅，船体被浮冰夹住，部分甲板仍露出水面。船舱中可能还存有未被取走的物资，但冰层随时可能坍塌，将船体彻底吞没。"
+type: "ruins"
+is_accessible: false
+parent_id: ""
+position: [-50, -30, 0]
+capacity: 0
+level: 2
+tags: ["ruins", "shipwreck", "danger_zone", "loot"]
+state: "derelict"
+environment: "coastal"
+can_get_time: true
+can_get_weather: true
+can_get_location: true
+can_get_atmosphere: true
+light_level: 0.3
+temperature: -32.0
+
+on_agent_enter_script: |
+  return true
+
+on_agent_leave_script: |
+  return true

@@ -1,0 +1,84 @@
+[gd_scene load_steps=7 format=3 uid="uid://bgyhjdmcoo6dc"]
+
+[ext_resource type="Theme" uid="uid://cnt7ouoddewj1" path="res://assets/themes/window_theme.tres" id="1_lsscw"]
+[ext_resource type="Script" uid="uid://nlqwnrljjw5c" path="res://prefabs/select/HintPanel.cs" id="2_grpcu"]
+[ext_resource type="Texture2D" uid="uid://dhstx03xfklk8" path="res://icon.svg" id="3_w3r4f"]
+[ext_resource type="FontFile" uid="uid://8xsd7lhq1kiq" path="res://assets/fonts/ABSTER-2.otf" id="3_xbfnf"]
+[ext_resource type="FontFile" uid="uid://dtmhehlp8yaqc" path="res://assets/fonts/新愚公装甲宋B.ttf" id="5_atr02"]
+
+[sub_resource type="FontVariation" id="FontVariation_xbfnf"]
+fallbacks = Array[Font]([ExtResource("5_atr02")])
+base_font = ExtResource("3_xbfnf")
+spacing_bottom = -780
+baseline_offset = 0.125
+
+[node name="Hint" type="PopupPanel"]
+title = "as"
+size = Vector2i(846, 14969)
+visible = true
+theme = ExtResource("1_lsscw")
+script = ExtResource("2_grpcu")
+
+[node name="M" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 842.0
+offset_bottom = 14965.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_lsscw")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Icon" type="TextureRect" parent="M"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture = ExtResource("3_w3r4f")
+expand_mode = 1
+
+[node name="Content" type="VBoxContainer" parent="M"]
+layout_mode = 2
+
+[node name="H" type="HBoxContainer" parent="M/Content"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="M/Content/H"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_fonts/font = SubResource("FontVariation_xbfnf")
+theme_override_font_sizes/font_size = 60
+text = "THE HARBOR"
+
+[node name="Subtitle" type="Label" parent="M/Content/H"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = SubResource("FontVariation_xbfnf")
+theme_override_font_sizes/font_size = 30
+text = "THE HARBOR啊"
+
+[node name="Content" type="Label" parent="M/Content"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("5_atr02")
+text = "asdsdddddddddddddddddddddddddddddddddddddddddd"
+autowrap_mode = 3
+
+[node name="Resources" type="HBoxContainer" parent="M/Content"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="M/Content/Resources"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture = ExtResource("3_w3r4f")
+expand_mode = 1

@@ -1,0 +1,26 @@
+id: "prometheus_ruins"
+name: "普罗米修斯观测站旧址"
+description: "曾经是普罗米修斯观测站的核心驻点，距离现观测站仅五十单位。零点能灾变中，一道炽白的能裂痕从正中贯穿整个基地，将钢骨框架与旧港口如同纸片般撕裂。现遗址分为南北两段，中央裂痕常年闪烁着幽蓝的能光，接近者会检测到极端能量波动。由于结构严重受损与稳定性难以保障，基地在数年前被彻底废弃。"
+type: "ruins"
+is_accessible: false
+parent_id: ""
+position: [35, -35, 0]
+capacity: 0
+level: 3
+tags: ["ruins", "history", "danger_zone"]
+state: "derelict"
+environment: "outdoor"
+can_get_time: true
+can_get_weather: true
+can_get_location: true
+can_get_atmosphere: false
+light_level: 0.3
+temperature: -40.0
+
+on_agent_enter_script: |
+  # 遇到裂痕，自动触发高危警告
+  agent.setStatus("warning", "零点能裂痕带来的能量波动极端危险，建议立刻离开！")
+  return false
+
+on_agent_leave_script: |
+  return true

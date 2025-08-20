@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnb0j8vhuqd0b"]
+
+[ext_resource type="PackedScene" uid="uid://bdwdhxtn6wr40" path="res://scenes/ui/roleplay_ui.tscn" id="1_0"]
+
+[node name="TestFunctionCall" type="Node2D"]
+
+[node name="RoleplayUI" parent="." instance=ExtResource("1_0")]

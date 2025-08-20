@@ -1,0 +1,288 @@
+[gd_scene load_steps=8 format=3 uid="uid://cvirbw6s8xj3h"]
+
+[ext_resource type="VideoStream" uid="uid://bapql2kaa115c" path="res://assets/audio/media/intro.ogv" id="1_5rfrr"]
+[ext_resource type="Script" uid="uid://c27ss1uv5bt5j" path="res://scenes/ui/Splash.cs" id="1_sykqw"]
+[ext_resource type="Texture2D" uid="uid://c03wpn4mom0h1" path="res://assets/images/logo_large_monochrome_dark.png" id="3_fgod4"]
+
+[sub_resource type="Theme" id="Theme_sykqw"]
+default_font_size = 30
+
+[sub_resource type="Animation" id="Animation_fgod4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Disclaimer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PSE:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Godot:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_sykqw"]
+resource_name = "intro"
+length = 9.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Disclaimer:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 2.13333, 2.63333, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PSE:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2.15667, 2.63333, 5.06667, 5.56),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Godot:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(5.16667, 5.64333, 8.07667, 8.57),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fgod4"]
+_data = {
+&"RESET": SubResource("Animation_fgod4"),
+&"intro": SubResource("Animation_sykqw")
+}
+
+[node name="Splash" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_sykqw")
+script = ExtResource("1_sykqw")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("1_5rfrr")
+
+[node name="Player" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_fgod4")
+}
+
+[node name="Disclaimer" type="Control" parent="."]
+modulate = Color(0, 0, 0, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Disclaimer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 150
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Disclaimer/MarginContainer"]
+custom_minimum_size = Vector2(1440, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Disclaimer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "免责声明"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="Disclaimer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "本游戏为虚构作品。任何与现实人物、组织、地点或事件之相似，纯属巧合。游戏包含[内容要素：如暴力、血液、粗俗语言、恐怖情节、性暗示、药物/酒精、模拟赌博等]，仅适合[分级/年龄]用户。在线互动内容由玩家生成，可能未经过分级机构审查。所有商标归其各自所有，已获许可使用。"
+autowrap_mode = 3
+
+[node name="Label5" type="Label" parent="Disclaimer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = " "
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label3" type="Label" parent="Disclaimer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Disclaimer"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label4" type="Label" parent="Disclaimer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "This game is a work of fiction. Any resemblance to actual persons, organizations, locations, or events is coincidental. The game may include the following content: [list content such as violence, blood, strong language, horror, suggestive themes, alcohol/drug references, simulated gambling]. Intended for [Rating/Age] audiences.
+Online interactions are user-generated and may not be reviewed or rated by rating authorities.  All trademarks are the property of their respective owners and used under license."
+autowrap_mode = 3
+
+[node name="Label6" type="Label" parent="Disclaimer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 40
+text = "© 2025 唐完了就宋 and Bosegluon, All right reserve"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="PSE" type="Control" parent="."]
+modulate = Color(0, 0, 0, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PSE"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PSE/MarginContainer"]
+custom_minimum_size = Vector2(1440, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="PSE/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "光敏性癫痫与健康警告"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="PSE/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "部分人（包括无癫痫史者）在接触闪烁光源或某些图案时可能引发光敏性癫痫或出现不适症状。症状可能包括：头痛、头晕、恶心、视力异常、眼面肌抽动、四肢不自主抖动、定向障碍、意识丧失、癫痫发作等。
+若您或家族成员有癫痫史，请在游玩前咨询医生。若出现任何不适，请立即停止游玩并就医。
+建议：在明亮环境中游玩；与屏幕保持适当距离；降低屏幕亮度；避免疲劳与长时间连续游玩；每30–60分钟休息。可在‘设置-辅助功能/显示/相机’中开启：减少闪烁/高亮、降低屏幕抖动、减少快速镜头切换、降低运动模糊、色彩安全模式等以降低不适风险"
+autowrap_mode = 3
+
+[node name="Label5" type="Label" parent="PSE/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = " "
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label3" type="Label" parent="PSE/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Photosensitivity and health warning"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label4" type="Label" parent="PSE/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "A small percentage of people, including those with no history of seizures, may experience photosensitive epileptic seizures or other discomfort when exposed to flashing lights or certain visual patterns. Symptoms may include headache, dizziness, nausea, visual disturbances, eye or facial twitching, involuntary movements, disorientation, loss of awareness, or seizures.
+If you or a family member has a history of epilepsy or seizures, consult a doctor before playing. Stop playing immediately if you experience any symptoms and seek medical advice.
+To reduce risk and discomfort:
+Play in a well-lit room and sit at a comfortable viewing distance.
+Avoid playing when tired or sleep-deprived; take a break every 30–60 minutes.
+Lower screen brightness and consider enabling Accessibility options such as: reduce flashes/high-intensity effects, reduce camera shake, limit rapid camera cuts, reduce motion blur, and color-safety modes.
+For more information, see the in-game Health & Safety or Accessibility settings."
+autowrap_mode = 3
+
+[node name="Godot" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Godot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 200
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 200
+
+[node name="TextureRect" type="TextureRect" parent="Godot/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("3_fgod4")
+expand_mode = 2
+stretch_mode = 5

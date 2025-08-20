@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://y3h8droc6akn"]
+
+[ext_resource type="Script" uid="uid://brw8c2pss35t3" path="res://scripts/utils/BgmManager.cs" id="1_6pm7p"]
+[ext_resource type="AudioStream" uid="uid://0w5f560whuw2" path="res://assets/audio/music/dark_sooth_2.ogg" id="2_6pm7p"]
+
+[node name="BgmManager" type="Node"]
+script = ExtResource("1_6pm7p")
+
+[node name="Bgm" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_6pm7p")
+autoplay = true

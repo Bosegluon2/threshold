@@ -1,0 +1,158 @@
+id: "player"
+name: "深潜者"
+personality: "坚韧果断，兼具理性与同理心，善于在极端环境下做出抉择"
+gender: "自定义"
+age: 32
+profession: "普罗米修斯基地领袖"
+faction: "普罗米修斯基地"
+education: "多学科交叉背景，具备科学、工程与领导力训练"
+background_story: "作为普罗米修斯基地的领袖，曾在灾变前接受过严格的训练，拥有丰富的危机应对经验。灾难爆发后，带领团队在基地中生存、探索、寻找人类文明延续的希望。既是团队的决策者，也是大家的精神支柱。"
+
+# 基本信息
+appearance: "身形健硕，目光坚定，常穿功能性服装，随身携带多用途装备"
+appearance_secrecy: 1
+speech_style: "简明有力，善于激励团队，能在关键时刻安抚人心"
+speech_style_secrecy: 1
+goals: "带领团队在极端环境下生存，寻找重建文明的契机"
+goals_secrecy: 25
+fears: "团队成员失去希望，深海基地失守"
+fears_secrecy: 25
+secrets: "曾在危机中不得不牺牲部分成员以保全大局"
+secrets_secrecy: 70
+traits:
+  - "坚韧"
+  - "果断"
+  - "同理心"
+  - "适应力强"
+  - "领导力"
+  - "冷静"
+  
+# 技能和状态
+skills:
+  - "leadership"
+  - "crisis_management"
+  - "engineering"
+  - "survival"
+  - "negotiation"
+
+status:
+  - "high_responsibility"
+  - "mental_fatigue"
+
+# 数值属性
+max_health: 100
+max_energy: 100
+max_thirst: 100
+max_satiety: 100
+
+thirst_consumption_rate: 10
+satiety_consumption_rate: 12
+
+base_warfare: 6
+base_adaptability: 9
+base_reasoning: 8
+base_perception: 7
+base_endurance: 8
+base_dexterity: 6
+knowledge_level: "Expert"
+
+# ========== 新增角色深度属性 ==========
+
+# 爱好与兴趣
+likes:
+  - "深海探索"
+  - "团队协作"
+  - "极限运动"
+  - "机械改造"
+  - "战略游戏"
+
+dislikes:
+  - "背叛"
+  - "无谓争吵"
+  - "拖延"
+  - "资源浪费"
+
+# 食物偏好
+favorite_foods:
+  - "high_protein_rations"
+  - "energy_drink"
+  - "seafood"
+
+disliked_foods:
+  - "甜食"
+  - "油腻食物"
+
+dietary_restrictions:
+  - null
+
+# 初始化记忆
+memories:
+  - "第一次深潜任务的紧张与兴奋"
+  - "灾变爆发时的混乱与抉择"
+  - "团队成员在绝境中互助的温情"
+
+initial_place: "prometheus_observatory_hall"
+
+# 生活习惯
+wake_up_time: 5
+sleep_time: 23
+personal_hygiene: "高度自律，保持清洁"
+
+# 情感与心理状态
+triggers: "团队成员失控，基地系统故障"
+coping_mechanisms: "视觉模糊，梦境不稳"
+comfort_method: "团队的信任，家人的照片"
+
+# 价值观与信仰
+core_values:
+  - "团队至上"
+  - "责任"
+  - "适应变化"
+  - "希望"
+
+moral_code: "在极端环境下，必须做出最有利于团队生存的选择"
+life_philosophy: "希望源于行动" 
+
+# OCEAN评分
+openness: 8
+conscientiousness: 9
+extraversion: 7
+agreeableness: 7
+neuroticism: 5
+
+# 生活细节
+personal_style: "实用主义，注重效率与安全"
+
+# 时间戳
+created_date: "2087-03-10T00:00:00"
+last_updated: "2087-08-20T00:00:00"
+
+# 绑定信息
+bound_agent_id: ""
+is_bound: false
+
+# 动态属性初始化
+current_health: 95 #高压下保持良好状态
+current_energy: 85 #长期高负荷工作略有疲劳
+current_status:
+  - "high_responsibility"
+  - "mental_fatigue"
+current_skills:
+  - null
+current_warped_attributes:
+  - "warfare": null
+  - "adaptability": null
+  - "reasoning": null
+  - "perception": null
+  - "endurance": null
+  - "dexterity": null
+
+inventory:
+  - "multi_tool"
+  - "leadership_badge"
+  - "emergency_kit"
+  - "deep_sea_suit"
+  - "base_access_card"
+  - "family_photo"
+vote_weight: 2.0
+

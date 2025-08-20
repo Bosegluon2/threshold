@@ -1,0 +1,51 @@
+id: "heal"
+name: "治疗术"
+description: "恢复目标的生命值"
+category: "utility"
+type: "active"
+element: "holy"
+level: 1
+max_level: 10
+energy_cost: 30
+cooldown: 8.0
+range: 15.0
+area_of_effect: 0.0
+icon: "res://assets/icons/skills/heal.png"
+animation: "cast_heal"
+sound_effect: "res://assets/audio/sfx/heal_cast.wav"
+effect_script: |
+  # 治疗术效果脚本 - 检查和使用合并
+  
+  # 1. 检查冷却时间
+  if skill.isOnCooldown and (currentTime - lastUsedTime) < cooldown:
+    Context.Print("技能还在冷却中")
+    return 1  # 使用失败
+  
+  # 2. 检查能量消耗
+  if currentEnergy < skill.energyCost:
+    Context.Print("能量不足")
+    return 1  # 使用失败
+  
+  # 3. 检查目标
+  if target == null:
+    Context.Print("没有指定治疗目标")
+    return 1  # 使用失败
+  
+  # 4. 检查目标生命值信息
+  var currentHealth = Context.PathGet(target, "currentHealth")
+  var maxHealth = Context.PathGet(target, "maxHealth")
+  
+  if currentHealth == null or maxHealth == null:
+    Context.PrintErr("无法获取目标生命值信息")
+    return 1  # 使用失败
+  
+  # 5. 执行治疗效果
+  var healAmount = skill.level * 12 + 25  # 基础治疗25 + 每级12点
+  var newHealth = min(currentHealth + healAmount, maxHealth)
+  Context.PathSet(target, "currentHealth", newHealth)
+  
+  var actualHeal = newHealth - currentHealth
+  Context.Print("治疗术恢复了 " + str(actualHeal) + " 点生命值")
+  
+  # 6. 返回成功，技能系统会自动更新冷却时间
+  return 0

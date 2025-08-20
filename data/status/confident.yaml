@@ -1,0 +1,33 @@
+id: "confident"
+name: "自信"
+description: "充满自信，社交和战斗能力提升"
+icon: "res://assets/icons/status/confident.png"
+category: "mental"
+priority: 1
+duration: 2400  # 40分钟
+stackable: false
+removable: true
+effect_script: |
+  # 自信状态效果脚本
+  var status = ScriptExecutor.Context['status']
+  var target = ScriptExecutor.Context['target']
+  
+  # 社交能力提升15%
+  var currentSocial = target.CurrentWarpedInfo.Reasoning
+  var boostedSocial = int(currentSocial * 1.15)
+  target.CurrentWarpedInfo.Reasoning = boostedSocial
+  print('自信状态：社交能力提升15%')
+  
+  # 战斗能力提升10%
+  var currentCombat = target.CurrentWarpedInfo.Warfare
+  var boostedCombat = int(currentCombat * 1.10)
+  target.CurrentWarpedInfo.Warfare = boostedCombat
+  print('自信状态：战斗能力提升10%')
+  
+  # 士气提升20%
+  var currentMorale = target.Status.morale
+  var boostedMorale = int(currentMorale * 1.20)
+  target.Status.morale = boostedMorale
+  print('自信状态：士气提升20%')
+  
+  return true

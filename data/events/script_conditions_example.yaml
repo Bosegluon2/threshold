@@ -1,0 +1,146 @@
+# 脚本条件示例事件
+# 展示如何使用ScriptExecutor替代复杂的条件配置
+
+events:
+  script_test_event:
+    event_id: "script_test_event"
+    event_name: "脚本条件测试事件"
+    event_type: "side"
+    description: "测试脚本条件系统的事件"
+    
+    # 使用脚本条件替代复杂的条件配置
+    activation_conditions:
+      - type: "script"
+        condition_id: "player_ready_condition"
+        description: "玩家是否准备好（等级、技能、金币都满足要求）"
+        condition_script: |
+          # 检查玩家是否准备好
+          var playerLevel = Global.globalVariables.get("player_level", 0)
+          var magicSkill = Global.globalVariables.get("magic_skill", 0)
+          var gold = Global.globalVariables.get("gold", 0)
+          
+          print("检查玩家状态：等级=", playerLevel, " 技能=", magicSkill, " 金币=", gold)
+          
+          # 返回是否满足条件
+          return playerLevel >= 5 and magicSkill >= 50 and gold >= 500
+    
+    required_tasks:
+      - task_id: "script_condition_task"
+        task_name: "脚本条件任务"
+        task_type: "training"
+        required_progress: 100
+        current_progress: 0
+        status: "not_started"
+        description: "完成这个任务来测试脚本条件"
+    
+    branches:
+      - branch_id: "success_path"
+        branch_name: "成功路径"
+        type: "manual"
+        probability: 100
+        enable_conditions:
+          - type: "script"
+            condition_id: "success_condition"
+            description: "任务完成且玩家状态良好"
+            condition_script: |
+              # 检查任务完成状态和玩家等级
+              var questProgress = Global.globalVariables.get("quest_progress", 0)
+              var playerLevel = Global.globalVariables.get("player_level", 0)
+              
+              print("检查成功条件：任务进度=", questProgress, " 玩家等级=", playerLevel)
+              
+              return questProgress >= 100 and playerLevel >= 10
+        
+        next_events:
+          - event_id: "next_event"
+            event_name: "后续事件"
+            activation_delay: 1
+    
+      - branch_id: "failure_path"
+        branch_name: "失败路径"
+        type: "manual"
+        probability: 100
+        enable_conditions:
+          - type: "script"
+            condition_id: "failure_condition"
+            description: "任务未完成或玩家状态不佳"
+            condition_script: |
+              # 检查失败条件
+              var questProgress = Global.globalVariables.get("quest_progress", 0)
+              var playerLevel = Global.globalVariables.get("player_level", 0)
+              
+              print("检查失败条件：任务进度=", questProgress, " 玩家等级=", playerLevel)
+              
+              return questProgress < 100 or playerLevel < 10
+        
+        next_events:
+          - event_id: "retry_event"
+            event_name: "重试事件"
+            activation_delay: 2
+
+# 更复杂的脚本条件示例
+complex_script_conditions:
+  # 动态条件：根据游戏状态动态判断
+  dynamic_condition:
+    type: "script"
+    condition_id: "dynamic_condition"
+    description: "根据多个游戏状态动态判断"
+    condition_script: |
+      # 获取游戏状态
+      var playerLevel = Global.globalVariables.get("player_level", 0)
+      var magicSkill = Global.globalVariables.get("magic_skill", 0)
+      var gold = Global.globalVariables.get("gold", 0)
+      var questCompleted = Global.globalVariables.get("quest_completed", false)
+      
+      print("动态条件检查：等级=", playerLevel, " 技能=", magicSkill, " 金币=", gold, " 任务=", questCompleted)
+      
+      # 复杂的逻辑判断
+      var levelOk = playerLevel >= 10
+      var skillOk = magicSkill >= 75
+      var moneyOk = gold >= 1000
+      var questOk = questCompleted == true
+      
+      # 返回最终结果
+      return levelOk and skillOk and moneyOk and questOk
+  
+  # 状态修改条件：执行操作后判断结果
+  state_modification_condition:
+    type: "script"
+    condition_id: "state_modification_condition"
+    description: "修改游戏状态后判断结果"
+    condition_script: |
+      # 添加临时标记
+      Global.globalVariables["temp_check"] = "checking"
+      
+      # 检查是否添加成功
+      var hasKey = Global.globalVariables.has("temp_check")
+      print("临时标记检查：", hasKey)
+      
+      return hasKey
+  
+  # 条件链：多个条件依次判断
+  condition_chain:
+    type: "script"
+    condition_id: "condition_chain"
+    description: "条件链式判断"
+    condition_script: |
+      # 第一步：检查基础条件
+      var baseOk = Global.globalVariables.get("player_level", 0) >= 5
+      if not baseOk:
+          print("基础条件不满足")
+          return false
+      
+      # 第二步：检查技能条件
+      var skillOk = Global.globalVariables.get("magic_skill", 0) >= 30
+      if not skillOk:
+          print("技能条件不满足")
+          return false
+      
+      # 第三步：检查资源条件
+      var resourceOk = Global.globalVariables.get("gold", 0) >= 200
+      if not resourceOk:
+          print("资源条件不满足")
+          return false
+      
+      print("所有条件链检查通过")
+      return true

@@ -1,0 +1,210 @@
+[gd_scene load_steps=13 format=3 uid="uid://htrmqi775yax"]
+
+[ext_resource type="Script" uid="uid://cgmt6h5yech15" path="res://scenes/levels/CommitteeScene.cs" id="1_82fsu"]
+[ext_resource type="PackedScene" uid="uid://dmq331y8113nt" path="res://assets/models/art_gallery/art_gallery.glb" id="2_i3v4t"]
+[ext_resource type="Theme" uid="uid://cnt7ouoddewj1" path="res://assets/themes/window_theme.tres" id="3_x1l1j"]
+[ext_resource type="Script" uid="uid://ct6ar46uehrrj" path="res://scenes/levels/CommitteeUi.cs" id="4_xo1cl"]
+[ext_resource type="PackedScene" uid="uid://bd5cab8k2jeni" path="res://scenes/ui/components/animated_button/AnimatedButton.tscn" id="5_lhnyj"]
+[ext_resource type="Shader" uid="uid://c2uj6kj7qyumd" path="res://assets/shaders/ChromaticAbberation.gdshader" id="6_x1l1j"]
+
+[sub_resource type="Environment" id="Environment_i3v4t"]
+sdfgi_enabled = true
+sdfgi_energy = 0.4
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i3v4t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k86ej"]
+bg_color = Color(0.462387, 0.678373, 5.77569e-07, 1)
+corner_radius_top_left = 1395
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k86ej"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i3v4t"]
+bg_color = Color(0.835294, 0.0313726, 0, 1)
+corner_radius_top_right = 4280
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xo1cl"]
+shader = ExtResource("6_x1l1j")
+shader_parameter/levels = 500
+shader_parameter/_amount = 1.29
+shader_parameter/_aberrationCenter = Vector2(0.5, 0.5)
+shader_parameter/_centerFade = 0.154
+
+[node name="CommitteeScene" type="Node3D"]
+script = ExtResource("1_82fsu")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1, 1, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 0, 0)
+visible = false
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("2_i3v4t")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -0.878115, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_i3v4t")
+
+[node name="CommitteeUi" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_x1l1j")
+script = ExtResource("4_xo1cl")
+
+[node name="MC" type="MarginContainer" parent="CommitteeUi"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="Turn" type="Label" parent="CommitteeUi/MC"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 80
+
+[node name="Approve" type="ProgressBar" parent="CommitteeUi/MC"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_i3v4t")
+theme_override_styles/fill = SubResource("StyleBoxFlat_k86ej")
+value = 32.57
+show_percentage = false
+
+[node name="Reject" type="ProgressBar" parent="CommitteeUi/MC"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_k86ej")
+theme_override_styles/fill = SubResource("StyleBoxFlat_i3v4t")
+value = 25.38
+fill_mode = 1
+show_percentage = false
+
+[node name="StatusPanel" type="Panel" parent="CommitteeUi/MC"]
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="V" type="VBoxContainer" parent="CommitteeUi/MC/StatusPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="H" type="HBoxContainer" parent="CommitteeUi/MC/StatusPanel/V"]
+layout_mode = 2
+
+[node name="StatusTitle" type="Label" parent="CommitteeUi/MC/StatusPanel/V/H"]
+layout_mode = 2
+text = "状态："
+
+[node name="Status" type="Label" parent="CommitteeUi/MC/StatusPanel/V/H"]
+layout_mode = 2
+
+[node name="Messages" type="ScrollContainer" parent="CommitteeUi/MC/StatusPanel/V"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="V" type="VBoxContainer" parent="CommitteeUi/MC/StatusPanel/V/Messages"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="H2" type="HBoxContainer" parent="CommitteeUi/MC/StatusPanel/V"]
+layout_mode = 2
+
+[node name="StatusTitle" type="Label" parent="CommitteeUi/MC/StatusPanel/V/H2"]
+layout_mode = 2
+text = "结果："
+
+[node name="Result" type="Label" parent="CommitteeUi/MC/StatusPanel/V/H2"]
+layout_mode = 2
+
+[node name="PolicyPanel" type="Panel" parent="CommitteeUi/MC"]
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="S" type="ScrollContainer" parent="CommitteeUi/MC/PolicyPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="V" type="VBoxContainer" parent="CommitteeUi/MC/PolicyPanel/S"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PolicyTitle" type="Label" parent="CommitteeUi/MC/PolicyPanel/S/V"]
+layout_mode = 2
+text = "标题："
+
+[node name="TitleInput" type="LineEdit" parent="CommitteeUi/MC/PolicyPanel/S/V"]
+layout_mode = 2
+
+[node name="ContentTitle" type="Label" parent="CommitteeUi/MC/PolicyPanel/S/V"]
+layout_mode = 2
+text = "内容："
+
+[node name="ContentInput" type="TextEdit" parent="CommitteeUi/MC/PolicyPanel/S/V"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+wrap_mode = 1
+scroll_fit_content_height = true
+
+[node name="ModifierTitle" type="Label" parent="CommitteeUi/MC/PolicyPanel/S/V"]
+layout_mode = 2
+text = "修正："
+
+[node name="ModifierInput" type="TextEdit" parent="CommitteeUi/MC/PolicyPanel/S/V"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+wrap_mode = 1
+scroll_fit_content_height = true
+
+[node name="Submit" type="Button" parent="CommitteeUi/MC/PolicyPanel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "提交"
+
+[node name="NextRound" parent="CommitteeUi/MC" instance=ExtResource("5_lhnyj")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 100
+text = "下一回合"
+
+[node name="Effect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_xo1cl")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

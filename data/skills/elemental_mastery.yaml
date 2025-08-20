@@ -1,0 +1,97 @@
+id: "elemental_mastery"
+name: "元素精通"
+description: "根据环境元素属性增强技能效果"
+category: "passive"
+type: "passive"
+element: "arcane"
+level: 1
+max_level: 5
+energy_cost: 0
+cooldown: 0.0
+range: 0.0
+area_of_effect: 0.0
+icon: "res://assets/icons/skills/elemental_mastery.png"
+animation: ""
+sound_effect: ""
+effect_script: |
+  # 元素精通被动效果脚本 - 展示复杂的GDScript语法
+  
+  # 1. 检查冷却时间（被动技能通常没有冷却）
+  if skill.isOnCooldown and (currentTime - lastUsedTime) < cooldown:
+    Context.Print("技能还在冷却中")
+    return 1  # 使用失败
+  
+  # 2. 检查能量消耗（被动技能通常没有能量消耗）
+  if currentEnergy < skill.energyCost:
+    Context.Print("能量不足")
+    return 1  # 使用失败
+  
+  # 3. 检查施法者
+  if caster == null:
+    Context.Print("没有指定施法者")
+    return 1  # 使用失败
+  
+  # 4. 获取环境元素属性
+  var environmentElement = Context.PathGet(caster, "currentEnvironment.element")
+  if environmentElement == null:
+    environmentElement = "neutral"
+  var elementBonus = 0.0
+  
+  # 5. 使用if-elif-else语句根据元素类型计算加成
+  if environmentElement == "fire":
+    elementBonus = skill.level * 0.3  # 火元素每级30%加成
+    Context.Print("火元素环境，火系技能威力增强")
+  elif environmentElement == "ice":
+    elementBonus = skill.level * 0.25  # 冰元素每级25%加成
+    Context.Print("冰元素环境，冰系技能威力增强")
+  elif environmentElement == "lightning":
+    elementBonus = skill.level * 0.35  # 雷元素每级35%加成
+    Context.Print("雷元素环境，雷系技能威力增强")
+  elif environmentElement == "earth":
+    elementBonus = skill.level * 0.2  # 土元素每级20%加成
+    Context.Print("土元素环境，土系技能威力增强")
+  else:
+    elementBonus = skill.level * 0.1  # 中性环境每级10%加成
+    Context.Print("中性环境，技能威力略微增强")
+  
+  # 6. 创建元素加成数组
+  var elementBonuses = ["fire", "ice", "lightning", "earth", "arcane"]
+  
+  # 7. 使用for循环应用所有元素加成
+  var totalBonus = 0.0
+  for element in elementBonuses:
+    var currentBonus = Context.PathGet(caster, "elementalBonus." + element)
+    if currentBonus == null:
+      currentBonus = 0.0
+    var newBonus = currentBonus + elementBonus
+    
+    Context.PathSet(caster, "elementalBonus." + element, newBonus)
+    totalBonus += newBonus
+    
+    Context.Print("元素 " + element + " 加成: " + str(newBonus))
+  
+  # 8. 应用通用属性加成
+  var level = skill.level
+  var attackBonus = level * 2
+  var defenseBonus = level * 1.5
+  var magicBonus = level * 3
+  
+  var currentAttack = Context.PathGet(caster, "attackPower")
+  if currentAttack == null:
+    currentAttack = 0.0
+  var currentDefense = Context.PathGet(caster, "defensePower")
+  if currentDefense == null:
+    currentDefense = 0.0
+  var currentMagic = Context.PathGet(caster, "magicPower")
+  if currentMagic == null:
+    currentMagic = 0.0
+  
+  Context.PathSet(caster, "attackPower", currentAttack + attackBonus)
+  Context.PathSet(caster, "defensePower", currentDefense + defenseBonus)
+  Context.PathSet(caster, "magicPower", currentMagic + magicBonus)
+  
+  Context.Print("元素精通 " + str(level) + " 级: 攻击+" + str(attackBonus) + ", 防御+" + str(defenseBonus) + ", 魔法+" + str(magicBonus))
+  Context.Print("总元素加成: " + str(totalBonus))
+  
+  # 9. 返回成功，技能系统会自动更新冷却时间
+  return 0

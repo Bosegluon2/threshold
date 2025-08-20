@@ -1,0 +1,169 @@
+id: "alina_wolf"
+name: "艾莉娜沃尔夫"
+personality: "坚持原则，富有同情心，反对任何违背伦理的行为"
+gender: "女"
+age: 38
+profession: "伦理委员会代表"
+faction: "人权保护派"
+education: "生物伦理学博士学位"
+background_story: "曾目睹基因实验事故导致无辜者受害，从此致力于保护科研伦理。在普罗米修斯基地担任伦理委员会代表，负责确保所有研究符合伦理标准。"
+
+# 基本信息
+appearance: "高挑身材，绿色眼睛，总是穿着整洁的职业装"
+appearance_secrecy: 1
+speech_style: "温和但坚定，善于倾听，用词谨慎"
+speech_style_secrecy: 1
+goals: "确保所有研究符合伦理标准，保护团队成员权益"
+goals_secrecy: 35
+fears: "担心科学失控导致人类道德沦丧"
+fears_secrecy: 25
+secrets: "曾经因为坚持原则失去了一个重要研究职位"
+secrets_secrecy: 60
+traits: # 自然语言即可
+  - "坚持原则"
+  - "富有同情心"
+  - "正义感强"
+  - "善于倾听"
+  - "谨慎"
+  
+# 技能和状态
+skills: # id化，方便查找
+  - "bioethics"
+  - "conflict_mediation"
+  - "human_rights_law"
+
+status: # id化，方便查找
+  - "mild_anxiety"
+  - "high_alert"
+
+# 数值属性
+max_health: 85
+max_energy: 90
+max_thirst: 100
+max_satiety: 100
+
+thirst_consumption_rate: 5
+satiety_consumption_rate: 6
+
+base_warfare: 1
+base_adaptability: 7
+base_reasoning: 8
+base_perception: 8
+base_endurance: 5
+base_dexterity: 6
+knowledge_level: "Expert"
+
+# ========== 新增角色深度属性 ==========
+
+# 爱好与兴趣
+likes: #自然语言即可
+  - "园艺"
+  - "诗歌"
+  - "人类权利保护"
+  - "心理哲学"
+  - "音乐会和艺术展览"
+
+dislikes: #自然语言即可
+  - "不透明的决策过程"
+  - "对个体的忽视"
+  - "不公正的待遇"
+  - "道德妥协"
+
+# 食物偏好
+favorite_foods: # id化，方便查找
+  - "vegetarian_salad"
+  - "herbal_tea"
+  - "organic_food"
+
+disliked_foods: # id化，方便查找
+  - "processed_food"
+  - "meat_products"
+
+dietary_restrictions: # id化，方便查找
+  - "vegetarian"
+  # 素食主义者
+
+# 初始化记忆
+memories:
+  - "目睹基因实验事故的创伤记忆"
+  - "第一次成功阻止不道德实验的成就感"
+  - "获得生物伦理学博士学位"
+
+initial_place: "prometheus_observatory_hall"
+
+# 生活习惯
+wake_up_time: 6
+sleep_time: 22
+personal_hygiene: "非常注重"
+
+# 情感与心理状态
+triggers: "看到他人受到不公正对待，道德违背"
+coping_mechanisms: "沉默，自闭，拒绝合作，拒绝沟通"
+comfort_method: "母亲留下的项链，瑜伽"
+
+# 价值观与信仰
+core_values: # 自然语言即可
+  - "个体尊严不可侵犯"
+  - "知情同意原则"
+  - "人道主义"
+  - "程序正义"
+
+moral_code: "绝对不能违背基本人权" # 自然语言即可
+life_philosophy: "每个人都有其内在价值" # 自然语言即可
+
+# OCEAN评分
+openness: 8
+conscientiousness: 8
+extraversion: 6
+agreeableness: 9
+neuroticism: 5
+
+# 生活细节
+personal_style: "简约优雅，注重细节" # 自然语言即可
+
+# 时间戳
+created_date: "2087-03-20T00:00:00" # 时间戳
+last_updated: "2087-08-20T00:00:00" # 时间戳
+
+# 绑定信息
+bound_agent_id: ""
+is_bound: false
+
+
+# 动态属性初始化
+# public int CurrentHealth => currentHealth;
+# public int CurrentEnergy => currentEnergy;
+# public Array<Status> CurrentStatus => currentStatus;
+# public Dictionary<string, int> CurrentSkills => currentSkills;
+# public Dictionary<string, int> CurrentWarpedAttributes => currentWarpedAttributes;
+# public Array<string> Inventory => inventory;
+current_health: 80 #轻微焦虑影响
+current_energy: 70 #高度警觉消耗能量
+current_status: # id化，方便查找
+  - "mild_anxiety"
+  - "high_alert"
+current_skills: # id化，方便查找
+  - null #如果不用填写，则写null。注意，若填写这个技能将会与skills中的技能叠加，取最大集合。
+current_warped_attributes: 
+  - "warfare": null # 如果不需要填写，则写null。
+  - "adaptability": null
+  - "reasoning": null
+  - "perception": null
+  - "endurance": null
+  - "dexterity": null
+
+
+  # - "warfare": 10 #战争
+  # - "adaptability": 10 #适应性
+  # - "reasoning": 10 #理性
+  # - "perception": 10 #感知
+  # - "endurance": 10 #耐力
+  # - "dexterity": 10 #灵巧
+inventory: # id化，方便查找
+  - "ethics_manual"
+  - "mother_necklace"
+  - "meditation_mat"
+  - "journal"
+  - "herbal_tea_set"
+  - "professional_attire"
+vote_weight: 1.0

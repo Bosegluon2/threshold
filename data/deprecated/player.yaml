@@ -1,0 +1,159 @@
+id: "player"
+name: "探索者查理"
+personality: "好奇、勇敢、善良、富有同情心"
+gender: "男"
+age: 28
+profession: "探索者"
+faction: "自由探索者协会"
+education: "大学本科"
+background_story: "查理是一名来自现代世界的探索者，意外穿越到了这个魔法世界。他拥有丰富的现代知识和探索经验，对这个世界充满好奇，希望能够帮助这里的居民，同时找到回到原来世界的方法。"
+
+# 基本信息
+appearance: "身材中等，有着棕色的短发和绿色的眼睛，穿着现代的探索装备，总是带着一个装满工具的背包"
+appearance_secrecy: 10
+speech_style: "说话直接明了，喜欢使用现代词汇，有时会显得与这个世界格格不入，但充满善意"
+speech_style_secrecy: 5
+goals: "探索这个魔法世界，帮助当地居民，找到回到原来世界的方法"
+goals_secrecy: 30
+fears: "永远无法回到原来的世界，在这个世界失去方向感"
+fears_secrecy: 50
+secrets: "我其实来自另一个世界，拥有现代科技知识"
+secrets_secrecy: 80
+
+# 技能和状态
+skills:
+  - "现代科技知识"
+  - "探索技能"
+  - "急救技能"
+  - "语言学习"
+  - "适应性"
+  - "问题解决"
+
+status:
+  - "健康"
+  - "充满活力"
+  - "适应中"
+
+# 数值属性
+max_health: 100
+current_health: 100
+max_energy: 100
+current_energy: 100
+warfare: 20
+adaptability: 80
+reasoning: 75
+perception: 70
+endurance: 60
+dexterity: 65
+knowledge_level: "Intermediate"
+
+# ========== 新增角色深度属性 ==========
+
+# 爱好与兴趣
+hobbies:
+  - "探索未知"
+  - "学习新知识"
+  - "摄影记录"
+  - "与当地人交流"
+  - "收集纪念品"
+
+interests:
+  - "魔法理论"
+  - "古代文明"
+  - "跨文化交流"
+  - "现代科技应用"
+
+dislikes:
+  - "暴力冲突"
+  - "欺骗行为"
+  - "环境污染"
+  - "封闭思想"
+
+favorite_color: "深蓝色"
+favorite_season: "秋天"
+favorite_weather: "晴朗的秋日"
+
+# 食物偏好
+favorite_foods:
+  - "咖啡"
+  - "巧克力"
+  - "新鲜水果"
+  - "当地特色菜"
+  - "热汤"
+
+disliked_foods:
+  - "过于辛辣的食物"
+  - "腐烂的食物"
+  - "生食"
+
+dietary_restrictions: "无特殊限制，但偏好健康食物"
+cooking_skill: "基础水平，会做一些简单料理"
+favorite_drink: "黑咖啡"
+
+# 生活习惯
+sleep_schedule: "早睡早起，晚上11点睡觉，早上7点起床"
+morning_routine: "晨跑30分钟，整理装备，规划当天行程"
+evening_routine: "记录当天见闻，整理收集的资料，准备第二天计划"
+personal_hygiene: "非常注重个人卫生"
+organization_style: "非常整洁，喜欢把工具分类摆放"
+punctuality: "非常守时，认为时间就是生命"
+
+# 情感与心理状态
+current_mood: "兴奋"
+emotional_state: "积极"
+stress_level: "轻微"
+coping_mechanisms: "运动，记录，与朋友交流"
+triggers: "看到不公平的事情会愤怒，遇到困难时会焦虑"
+comfort_items: "随身携带的指南针，家乡的照片，热咖啡"
+
+# 价值观与信仰
+core_values:
+  - "探索精神"
+  - "善良"
+  - "正义"
+  - "学习"
+  - "适应性"
+
+moral_code: "不伤害无辜的人，尽力帮助需要帮助的人，尊重当地文化"
+religious_beliefs: "尊重各种信仰，保持开放心态"
+political_views: "支持和平共处，反对压迫"
+life_philosophy: "通过探索和学习来理解世界，帮助他人找到自己的价值"
+justice_sense: "强烈，无法容忍不公平和压迫"
+
+# 社交偏好
+social_energy: "外向，喜欢与人交流"
+communication_style: "直接友善，喜欢分享经验"
+conflict_resolution: "倾向于理性讨论，避免暴力冲突"
+leadership_style: "民主型领导，鼓励团队合作"
+teamwork_preference: "喜欢团队合作，认为集体力量大于个人"
+social_boundaries: "对陌生人保持友善，对朋友非常开放"
+
+# 个人特质
+sense_of_humor: "温和幽默，喜欢开善意的玩笑"
+creativity: "在解决问题方面很有创意"
+personal_adaptability: "适应能力很强，能快速适应新环境"
+perfectionism: "对重要任务要求很高"
+risk_tolerance: "中等，会评估风险后行动"
+decision_making: "理性分析，权衡利弊后决定"
+
+# 生活细节
+living_space: "临时营地，布置简单实用，有很多探索工具和地图"
+personal_style: "实用主义，喜欢耐用舒适的装备"
+pet_preference: "喜欢忠诚的动物，特别是狗和马"
+travel_style: "喜欢慢节奏的探索，享受沿途的风景和文化"
+entertainment: "阅读，摄影，与当地人交流，记录见闻"
+learning_style: "实践型学习者，喜欢通过亲身体验来掌握知识"
+
+# 时间戳
+created_date: "2024-01-01T00:00:00"
+last_updated: "2024-01-01T00:00:00"
+
+# 房间和绑定信息
+room_id: ""
+bound_agent_id: ""
+is_bound: false
+
+# 记忆系统
+memories: []
+important_events: []
+personal_secrets: []

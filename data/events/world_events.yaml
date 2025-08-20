@@ -1,0 +1,86 @@
+# 世界事件树
+event_tree:
+  tree_id: "world_events"
+  tree_name: "世界变化"
+  tree_type: "world"
+  priority: 60
+  is_required: false
+  
+  # 根事件
+  root_event:
+    event_id: "weather_storm"
+    event_name: "暴风雨"
+    description: "一场突如其来的暴风雨"
+    type: "world"
+    activation_turn: 20
+    expiration_turn: 23
+    duration: 3
+    is_persistent: false
+    
+    # 激活条件
+    activation_conditions:
+      - type: "script"
+        condition_id: "storm_weather_condition"
+        description: "检查是否应该触发暴风雨"
+        condition_script: |
+          # 检查天气条件
+          var currentWeather = Global.globalVariables.get("current_weather", "clear")
+          var humidity = Global.globalVariables.get("humidity", 50)
+          var pressure = Global.globalVariables.get("pressure", 1013)
+          
+          print("检查暴风雨条件：天气=", currentWeather, " 湿度=", humidity, " 气压=", pressure)
+          
+          # 高湿度、低气压时触发暴风雨
+          return humidity > 80 and pressure < 1000
+    
+    # 事件触发时执行一次的效果脚本
+    event_script: |
+      # 暴风雨事件触发脚本 - 只执行一次
+      print("暴风雨事件触发！")
+      
+      # 1. 设置世界状态
+      Global.globalVariables["current_weather"] = "storm"
+      Global.globalVariables["storm_intensity"] = 0.8
+      Global.globalVariables["storm_duration"] = 3
+      
+      # 2. 添加持续性效果到EventManager
+      var eventManager = GameManager.EventManager
+      if eventManager != null:
+          # 添加天气效果
+          var weatherEffect = {
+              "effect_id": "storm_weather_effect",
+              "effect_type": "weather",
+              "duration": 3,
+              "intensity": 0.8,
+              "target": "global"
+          }
+          eventManager.AddWorldEffect(weatherEffect)
+          
+          # 添加危险效果
+          var hazardEffect = {
+              "effect_id": "storm_hazard_effect", 
+              "effect_type": "hazard",
+              "duration": 3,
+              "intensity": 0.3,
+              "target": "outdoor_places"
+          }
+          eventManager.AddWorldEffect(hazardEffect)
+          
+          # 添加角色影响效果
+          var characterEffect = {
+              "effect_id": "storm_mood_effect",
+              "effect_type": "mood_change",
+              "duration": 3,
+              "value": -5,
+              "target": "all_outdoor_characters"
+          }
+          eventManager.AddCharacterEffect(characterEffect)
+      
+      print("暴风雨持续性效果已添加到EventManager")
+      return true
+    
+    # 世界影响 - 通过Effect系统实现，不在事件脚本中直接处理
+    world_effects: []  # 空列表，效果通过Effect系统管理
+    
+    # 角色影响 - 通过Effect系统实现，不在事件脚本中直接处理
+    character_effects: []  # 空列表，效果通过Effect系统管理

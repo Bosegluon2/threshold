@@ -1,0 +1,65 @@
+# 人物模板文件
+# 复制此文件并重命名为 {人物ID}.yaml，然后修改相应的值
+
+id: "char_XXXX"                    # 人物唯一ID (必须修改)
+name: "人物名称"                    # 人物名称 (必须修改)
+personality: "性格描述"              # 性格描述
+gender: "性别"                      # 性别 (男/女)
+age: 25                           # 年龄
+profession: "职业"                  # 职业
+faction: "派别"                    # 派别
+background_story: "背景故事描述"      # 背景故事
+
+# 外观和风格
+appearance: "外貌描述"
+appearance_secrecy: 20             # 外貌秘密程度 (0-100)
+speech_style: "说话风格描述"
+speech_style_secrecy: 10           # 说话风格秘密程度 (0-100)
+
+# 技能和目标
+skills:                           # 技能列表
+  - "技能1"
+  - "技能2"
+  - "技能3"
+goals: "目标描述"
+goals_secrecy: 40                 # 目标秘密程度 (0-100)
+fears: "恐惧描述"
+fears_secrecy: 60                 # 恐惧秘密程度 (0-100)
+secrets: "秘密描述"
+secrets_secrecy: 80               # 秘密秘密程度 (0-100)
+
+# 状态列表
+status:                           # 状态列表
+  - "状态1"
+  - "状态2"
+
+# 数值属性
+max_health: 100                   # 最大生命值
+current_health: 100               # 当前生命值
+max_energy: 100                   # 最大能量值
+current_energy: 100               # 当前能量值
+
+# WARPed System 属性 (0-10)
+warfare: 5                        # 战争能力
+adaptability: 5                   # 适应能力
+reasoning: 5                      # 推理能力
+perception: 5                     # 感知能力
+endurance: 5                      # 耐力
+dexterity: 5                      # 敏捷
+
+# 知识等级 (None, Basic, Intermediate, Advanced, Expert)
+knowledge_level: "Basic"
+
+# 时间戳 (系统会自动更新)
+created_date: "2024-01-01T00:00:00"    # 创建时间
+last_updated: "2024-01-01T00:00:00"    # 最后更新时间
+
+# 系统字段 (通常不需要手动修改)
+room_id: ""                              # 当前房间ID
+bound_agent_id: ""                       # 绑定的Agent ID
+is_bound: false                          # 是否已绑定
+
+# 关系网络 (可选)
+relationships:                           # 与其他角色的关系
+  "char_0001": "朋友"
+  "char_0002": "对手"

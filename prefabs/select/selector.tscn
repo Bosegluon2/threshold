@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bik16futkgmva"]
+
+[ext_resource type="Script" uid="uid://cbn1a6kfwmy1q" path="res://prefabs/select/Selector.cs" id="1_5dpky"]
+[ext_resource type="Texture2D" uid="uid://cosdguhiu2t6t" path="res://assets/kenney_particle_pack/circle_01.png" id="3_wj04o"]
+
+[node name="Selector" type="Node3D"]
+script = ExtResource("1_5dpky")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.0055
+billboard = 1
+texture = ExtResource("3_wj04o")

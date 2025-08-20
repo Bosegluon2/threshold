@@ -1,0 +1,36 @@
+id: "exhausted"
+name: "疲惫"
+description: "身体和精神都感到疲惫，需要休息"
+icon: "res://assets/icons/status/exhausted.png"
+category: "mental"
+priority: 2
+duration: 1800  # 30分钟
+stackable: false
+removable: true
+effect_script: |
+  # 疲惫状态效果脚本
+  var status = ScriptExecutor.Context['status']
+  var target = ScriptExecutor.Context['target']
+  
+  # 每60秒损失2点能量值
+  var currentEnergy = target.CurrentEnergy
+  if currentEnergy > 0:
+      var newEnergy = max(currentEnergy - 2, 0)
+      target.SetEnergy(newEnergy)
+      print('疲惫状态：损失2点能量值')
+  
+  # 技能效果降低10%
+  for i in target.CurrentStatus:
+      if i.Id == 'skill_penalty':
+          i.CurrentDuration -= 10
+          break
+  print('疲惫状态：技能效果降低10%')
+  
+  # 休息时恢复速度提升2倍
+  for i in target.CurrentStatus:
+      if i.Id == 'recovery_bonus':
+          i.CurrentDuration *= 2
+          break
+  print('疲惫状态：休息时恢复速度提升2倍')
+  
+  return true

@@ -1,0 +1,38 @@
+id: "theory"
+name: "魔法理论"
+description: "深厚的魔法理论知识，提升魔法学习和研究效率"
+icon: "res://assets/icons/skills/theory.png"
+category: "knowledge"
+type: "passive"
+element: "arcane"
+base_level: 1
+max_level: 10
+base_bonus: 10
+bonus_scaling: 2  # 每级增加2%效果
+energy_cost: 0
+cooldown: 0.0
+requirements:
+  - type: "level"
+    value: 1
+  - type: "attribute"
+    name: "base_reasoning"
+    value: 6
+effects:
+  - type: "learning_bonus"
+    value: "base_bonus"
+    scaling: "bonus_scaling"
+  - type: "research_bonus"
+    value: "base_bonus"
+    scaling: "bonus_scaling"
+  - type: "spell_creation"
+    value: "base_bonus"
+    scaling: "bonus_scaling"
+upgrades:
+  - level: 3
+    effect: "解锁高级魔法研究"
+  - level: 5
+    effect: "减少魔法学习时间"
+  - level: 7
+    effect: "提升魔法创造能力"
+  - level: 10
+    effect: "解锁传奇魔法研究"

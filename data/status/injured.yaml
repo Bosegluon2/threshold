@@ -1,0 +1,34 @@
+id: "injured"
+name: "受伤"
+description: "身体受到伤害，行动能力下降"
+icon: "res://assets/icons/status/injured.png"
+category: "physical"
+priority: 3
+duration: 3600  # 1小时
+stackable: false
+removable: true
+effect_script: |
+  # 受伤状态效果脚本
+  var target = ScriptExecutor.Context['target']
+  
+  # 每分钟减少1点生命值
+  var currentHealth = target.CurrentHealth
+  if currentHealth > 0:
+      var newHealth = max(currentHealth - 1, 0)
+      target.SetHealth(newHealth)
+      print('受伤状态减少1点生命值')
+  
+  # 战斗技能降低20%
+  var currentWarfare = target.Character.BaseWarpedInfo.Warfare
+  var modifiedWarfare = int(currentWarfare * 0.8)
+  target.Character.BaseWarpedInfo.Warfare = modifiedWarfare
+  
+  # 适应能力降低15%
+  var currentAdaptability = target.Character.BaseWarpedInfo.Adaptability
+  var modifiedAdaptability = int(currentAdaptability * 0.85)
+  target.Character.BaseWarpedInfo.Adaptability = modifiedAdaptability
+  
+  # 移动速度降低20%
+  print('受伤状态：移动速度降低20%')
+  
+  return true

@@ -1,0 +1,61 @@
+id: "combat_mastery"
+name: "战斗精通"
+description: "提升战斗相关属性"
+category: "passive"
+type: "passive"
+element: "physical"
+level: 1
+max_level: 5
+energy_cost: 0
+cooldown: 0.0
+range: 0.0
+area_of_effect: 0.0
+icon: "res://assets/icons/skills/combat_mastery.png"
+animation: ""
+sound_effect: ""
+effect_script: |
+  # 战斗精通被动效果脚本 - 检查和使用合并
+  
+  # 1. 检查冷却时间（被动技能通常没有冷却）
+  if skill.isOnCooldown and (currentTime - lastUsedTime) < cooldown:
+    Context.Print("技能还在冷却中")
+    return 1  # 使用失败
+  
+  # 2. 检查能量消耗（被动技能通常没有能量消耗）
+  if currentEnergy < skill.energyCost:
+    Context.Print("能量不足")
+    return 1  # 使用失败
+  
+  # 3. 检查施法者
+  if caster == null:
+    Context.Print("没有指定施法者")
+    return 1  # 使用失败
+  
+  # 4. 执行被动效果
+  var level = skill.level
+  
+  # 提升攻击力
+  var currentAttack = Context.PathGet(caster, "attackPower")
+  if currentAttack == null:
+    currentAttack = 0
+  var attackBonus = level * 3
+  Context.PathSet(caster, "attackPower", currentAttack + attackBonus)
+  
+  # 提升防御力
+  var currentDefense = Context.PathGet(caster, "defensePower")
+  if currentDefense == null:
+    currentDefense = 0
+  var defenseBonus = level * 2
+  Context.PathSet(caster, "defensePower", currentDefense + defenseBonus)
+  
+  # 提升暴击率
+  var currentCritRate = Context.PathGet(caster, "criticalRate")
+  if currentCritRate == null:
+    currentCritRate = 0
+  var critBonus = level * 0.5
+  Context.PathSet(caster, "criticalRate", currentCritRate + critBonus)
+  
+  Context.Print("战斗精通 " + str(level) + " 级: 攻击+" + str(attackBonus) + ", 防御+" + str(defenseBonus) + ", 暴击+" + str(critBonus) + "%")
+  
+  # 5. 返回成功，技能系统会自动更新冷却时间
+  return 0

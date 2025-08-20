@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://8c16hdie2vob"]
+
+[ext_resource type="Script" uid="uid://cuo5wb2xhjhwy" path="res://scenes/levels/Spawner.cs" id="1_f66v2"]
+[ext_resource type="PackedScene" uid="uid://bvhewt4iecxsr" path="res://prefabs/card/card.tscn" id="2_q0chi"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xgriu"]
+size = Vector2(10, 10)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_xgriu"]
+data = PackedVector3Array(5, 0, 5, -5, 0, 5, 5, 0, -5, -5, 0, 5, -5, 0, -5, 5, 0, -5)
+
+[node name="Happy" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("PlaneMesh_xgriu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_xgriu")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+script = ExtResource("1_f66v2")
+scene = ExtResource("2_q0chi")
+interval = 0.1
+rotationRandomness = 0.373
+positionRandomness = 0.777
+
+[node name="Timer" type="Timer" parent="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 1, 1.17408)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+shadow_enabled = true

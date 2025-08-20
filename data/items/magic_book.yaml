@@ -1,0 +1,51 @@
+id: "magic_book"
+name: "魔法书"
+description: "记载着古老魔法知识的书籍，可以提升魔法学习效率"
+icon: "res://assets/icons/items/magic_book.png"
+category: "book"
+rarity: "common"
+value: 50
+weight: 1
+durability: 100
+max_durability: 100
+is_equippable: true
+is_usable: true
+is_consumable: false
+max_stack: 1
+
+# 脚本化功能
+use_script: |
+  # 使用魔法书
+  var user = GetContext("user")
+  var item = GetContext("item")
+  
+  # 提升用户的推理能力
+  if user.CurrentWarpedInfo.Reasoning < 10:
+    user.CurrentWarpedInfo.Reasoning += 1
+    ScriptExecutor.Print("你阅读了魔法书，推理能力提升了！")
+    return true
+  else:
+    ScriptExecutor.Print("你的推理能力已经很高了，这本书对你帮助不大。")
+    return false
+
+equip_script: |
+  # 装备魔法书
+  var user =GetContext("user")
+  var item =GetContext("item")
+  
+  # 装备时给予学习加成
+  ScriptExecutor.Print("你装备了魔法书，感觉学习效率提升了。")
+  return true
+
+unequip_script: |
+  # 卸下魔法书
+  var user = GetContext("user")
+  var item = GetContext("item")
+  
+  print("你卸下了魔法书。")
+  return true
+
+tags:
+  - "magic"
+  - "knowledge"
+  - "equipment"

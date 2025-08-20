@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=3 uid="uid://debt5roduqogr"]
+
+[ext_resource type="Script" uid="uid://bl1co7x25ykg4" path="res://scenes/ui/GuiPanel3d.cs" id="1_rckqi"]
+[ext_resource type="FontFile" uid="uid://dtmhehlp8yaqc" path="res://assets/fonts/新愚公装甲宋B.ttf" id="2_56cxw"]
+[ext_resource type="PackedScene" uid="uid://bd5cab8k2jeni" path="res://scenes/ui/components/animated_button/AnimatedButton.tscn" id="2_728qr"]
+
+[sub_resource type="Theme" id="Theme_728qr"]
+default_font = ExtResource("2_56cxw")
+default_font_size = 50
+
+[sub_resource type="QuadMesh" id="QuadMesh_1d2p5"]
+size = Vector2(1.92, 1.08)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_1d2p5"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rckqi"]
+resource_local_to_scene = true
+transparency = 1
+albedo_texture = SubResource("ViewportTexture_1d2p5")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1d2p5"]
+size = Vector3(1.92, 1.08, 0.035)
+
+[node name="GUIPanel3D" type="Node3D"]
+script = ExtResource("1_rckqi")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(1920, 1080)
+
+[node name="GUI" type="Control" parent="SubViewport"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_728qr")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/GUI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="New" parent="SubViewport/GUI/VBoxContainer" instance=ExtResource("2_728qr")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "开始新的征程"
+
+[node name="Settings" parent="SubViewport/GUI/VBoxContainer" instance=ExtResource("2_728qr")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "设置"
+
+[node name="Quit" parent="SubViewport/GUI/VBoxContainer" instance=ExtResource("2_728qr")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "退出"
+
+[node name="Quad" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_1d2p5")
+surface_material_override/0 = SubResource("StandardMaterial3D_rckqi")
+
+[node name="Area3D" type="Area3D" parent="Quad"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Quad/Area3D"]
+shape = SubResource("BoxShape3D_1d2p5")

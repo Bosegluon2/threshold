@@ -1,0 +1,30 @@
+# 天气变化效果
+world_effect:
+  effect_id: "weather_change"
+  effect_name: "天气变化"
+  effect_type: "environmental"
+  description: "改变世界的天气状态"
+  
+  # 效果参数
+  parameters:
+    weather_type: "string"   # sunny/rainy/cloudy/storm
+    intensity: "float"       # 强度 0.0-1.0
+    duration: "int"          # 持续时间
+  
+  # 应用逻辑
+  application:
+    target_type: "global"
+    affected_systems:
+      - "outdoor_activities"
+      - "travel_speed"
+      - "resource_generation"
+  
+  # 连锁效果
+  chain_effects:
+    - effect_id: "travel_speed_modifier"
+      condition: "weather_type == 'storm'"
+      modifier: -0.5
+    
+    - effect_id: "resource_generation_modifier"
+      condition: "weather_type == 'rainy'"
+      modifier: 1.2

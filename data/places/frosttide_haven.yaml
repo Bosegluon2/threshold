@@ -1,0 +1,24 @@
+id: "frosttide_haven"
+name: "霜潮泊地"
+description: "位于普罗米修斯基地南偏西方向的远海港口，四周常年被浮冰与寒潮包围。加固的钢结构码头如同冰原上的孤岛，配备破冰船专用泊位、燃料补给设施与货物吊装系统。冬季狂风卷起雪潮，夏季则是雾与潮汐交替的季节，这里是基地与外界世界的唯一海上纽带。"
+type: "port"
+is_accessible: true
+parent_id: ""
+position: [-120, -80, 0]
+capacity: 4
+level: 0
+tags: ["logistics", "port", "infrastructure"]
+state: "operational"
+environment: "outdoor"
+can_get_time: true
+can_get_weather: true
+can_get_location: true
+can_get_atmosphere: true
+light_level: 0.8
+temperature: -35.0
+
+on_agent_enter_script: |
+  return true
+
+on_agent_leave_script: |
+  return true

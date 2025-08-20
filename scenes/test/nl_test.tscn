@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dft6w88slm05g"]
+
+[ext_resource type="Script" uid="uid://jgx8ftmicmor" path="res://scenes/test/NlTest.cs" id="1_pjtun"]
+
+[node name="NLTest" type="Node"]
+script = ExtResource("1_pjtun")

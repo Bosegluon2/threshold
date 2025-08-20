@@ -1,0 +1,54 @@
+id: "fireball"
+name: "火球术"
+description: "发射一个火球，对目标造成火焰伤害"
+category: "combat"
+type: "active"
+element: "fire"
+level: 1
+max_level: 10
+energy_cost: 25
+cooldown: 5.0
+range: 20.0
+area_of_effect: 0.0
+icon: "res://assets/icons/skills/fireball.png"
+animation: "cast_fireball"
+sound_effect: "res://assets/audio/sfx/fireball_cast.wav"
+effect_script: |
+  # 火球术效果脚本 - 检查和使用合并
+  
+  # 1. 检查冷却时间
+  if skill.isOnCooldown and (currentTime - lastUsedTime) < cooldown:
+    Context.Print("技能还在冷却中")
+    return 1  # 使用失败
+  
+  # 2. 检查能量消耗
+  if currentEnergy < skill.energyCost:
+    Context.Print("能量不足")
+    return 1  # 使用失败
+  
+  # 3. 检查目标
+  if target == null:
+    Context.Print("没有指定目标")
+    return 1  # 使用失败
+  
+  # 4. 执行技能效果
+  var damage = skill.level * 15 + 20  # 基础伤害20 + 每级15点
+  var fireDamage = damage * 1.5  # 火焰伤害加成
+  
+  # 对目标造成伤害
+  var targetHealth = Context.PathGet(target, "currentHealth")
+  var newHealth = targetHealth - fireDamage
+  Context.PathSet(target, "currentHealth", newHealth)
+  
+  # 添加燃烧状态
+  var burnEffect = {
+    "type": "burn",
+    "damage": fireDamage * 0.2,
+    "duration": 5.0
+  }
+  
+  # 这里可以调用状态管理器添加燃烧效果
+  Context.Print("火球术对目标造成 " + str(fireDamage) + " 点火焰伤害，并添加燃烧状态")
+  
+  # 5. 返回成功，技能系统会自动更新冷却时间
+  return 0

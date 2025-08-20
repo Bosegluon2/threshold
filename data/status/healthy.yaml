@@ -1,0 +1,37 @@
+id: "healthy"
+name: "健康"
+description: "身体状态良好，各项机能正常"
+icon: "res://assets/icons/status/healthy.png"
+category: "physical"
+priority: 1
+duration: -1  # -1表示永久状态
+stackable: false
+removable: true
+effect_script: |
+  # 健康状态效果脚本
+  var status = ScriptExecutor.Context['status']
+  var target = ScriptExecutor.Context['target']
+  
+  # 每一回合执行一次，所以不需要elapsedTime
+  var currentHealth = target.CurrentHealth
+  var maxHealth = target.Character.MaxHealth
+  if currentHealth < maxHealth:
+      var newHealth = min(currentHealth + 1, maxHealth)
+      target.SetHealth(newHealth)
+      print('健康状态恢复1点生命值')
+  
+  # 恢复2点能量值
+  var currentEnergy = target.CurrentEnergy
+  var maxEnergy = target.Character.MaxEnergy
+  if currentEnergy < maxEnergy:
+      var newEnergy = min(currentEnergy + 2, maxEnergy)
+      target.SetEnergy(newEnergy)
+      print('健康状态恢复2点能量值')
+  
+  # 80%几率免疫疾病状态
+  var randomValue = randi() % 100 + 1
+  if randomValue <= 80:
+      print('健康状态提供疾病免疫')
+      return true
+  else:
+      return false

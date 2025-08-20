@@ -1,0 +1,79 @@
+[gd_scene load_steps=5 format=3 uid="uid://bpw24fx0f8g2p"]
+
+[ext_resource type="Script" uid="uid://d0q67sb3nwps" path="res://scenes/ui/ui_layer/UiLayer.cs" id="1_ppaab"]
+[ext_resource type="Theme" uid="uid://bux6s8mj0wqpb" path="res://assets/themes/menu.tres" id="2_i283m"]
+[ext_resource type="Texture2D" uid="uid://b0yeqblyd1jgu" path="res://assets/sprites/svgs/theknotswhite.svg" id="3_c36kk"]
+[ext_resource type="PackedScene" uid="uid://bd5cab8k2jeni" path="res://scenes/ui/components/animated_button/AnimatedButton.tscn" id="4_gij46"]
+
+[node name="UILayer" type="CanvasLayer"]
+layer = 128
+script = ExtResource("1_ppaab")
+
+[node name="Modulator" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect2" type="ColorRect" parent="Modulator"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.4)
+
+[node name="ColorRect" type="ColorRect" parent="Modulator"]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_i283m")
+
+[node name="MarginContainer" type="MarginContainer" parent="Modulator/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TextureRect" type="TextureRect" parent="Modulator/ColorRect/MarginContainer"]
+self_modulate = Color(0.863239, 0.863239, 0.863239, 0.815686)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_c36kk")
+stretch_mode = 3
+
+[node name="Confirm" parent="Modulator/ColorRect/MarginContainer" instance=ExtResource("4_gij46")]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "Confirm"
+
+[node name="Back" parent="Modulator/ColorRect/MarginContainer" instance=ExtResource("4_gij46")]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Back"
+
+[node name="Label" type="Label" parent="Modulator/ColorRect/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Sure?"

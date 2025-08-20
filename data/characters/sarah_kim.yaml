@@ -1,0 +1,169 @@
+id: "sarah_kim"
+name: "萨拉金"
+personality: "富有同情心，理想主义，相信科技应服务于人类福祉"
+gender: "女"
+age: 29
+profession: "生物学家"
+faction: "理想主义派"
+education: "生物学博士学位"
+background_story: "年轻有为的科学家，相信科学应该造福人类，对未知充满好奇心。在普罗米修斯基地担任生物学家，负责研究生物学。"
+
+# 基本信息
+appearance: "娇小身材，长发，喜欢穿色彩鲜艳的衣服"
+appearance_secrecy: 1
+speech_style: "热情洋溢，充满好奇心，喜欢提问"
+speech_style_secrecy: 1
+goals: "通过科学研究改善人类生活，探索未知"
+goals_secrecy: 35
+fears: "科学研究被滥用，伤害无辜"
+fears_secrecy: 25
+secrets: "对异常现象有莫名的亲近感"
+secrets_secrecy: 70
+traits: # 自然语言即可
+  - "富有同情心"
+  - "理想主义"
+  - "好奇心强"
+  - "创新思维"
+  - "乐观"
+  
+# 技能和状态
+skills: # id化，方便查找
+  - "bioengineering"
+  - "data_analysis"
+  - "innovative_thinking"
+
+status: # id化，方便查找
+  - "excited_discovery"
+  - "mild_anxiety"
+
+# 数值属性
+max_health: 80
+max_energy: 95
+max_thirst: 100
+max_satiety: 100
+
+thirst_consumption_rate: 4
+satiety_consumption_rate: 4
+
+base_warfare: 3
+base_adaptability: 9
+base_reasoning: 7
+base_perception: 8
+base_endurance: 6
+base_dexterity: 7
+knowledge_level: "Advanced"
+
+# ========== 新增角色深度属性 ==========
+
+# 爱好与兴趣
+likes: #自然语言即可
+  - "观鸟"
+  - "摄影"
+  - "生物多样性研究"
+  - "生态保护"
+  - "自然纪录片"
+
+dislikes: #自然语言即可
+  - "破坏性实验"
+  - "官僚主义"
+  - "环境污染"
+  - "动物伤害"
+
+# 食物偏好
+favorite_foods: # id化，方便查找
+  - "fresh_fruit"
+  - "green_tea"
+  - "organic_food"
+
+disliked_foods: # id化，方便查找
+  - "processed_meat"
+  - "artificial_food"
+
+dietary_restrictions: # id化，方便查找
+  - "health_conscious"
+  # 健康饮食追求者
+
+# 初始化记忆
+memories:
+  - "第一次观察显微镜下的生命的震撼"
+  - "祖母讲述自然故事的温馨时光"
+  - "获得博士学位的喜悦"
+
+initial_place: "prometheus_observatory_hall"
+
+# 生活习惯
+wake_up_time: 7
+sleep_time: 1
+personal_hygiene: "注重清洁"
+
+# 情感与心理状态
+triggers: "看到生命受到威胁，环境破坏"
+coping_mechanisms: "无任何影响"
+comfort_method: "祖母的植物标本集，自然环境"
+
+# 价值观与信仰
+core_values: # 自然语言即可
+  - "科学造福人类"
+  - "生命神圣"
+  - "环境保护"
+  - "知识共享"
+
+moral_code: "科学必须以人为本" # 自然语言即可
+life_philosophy: "知识应该带来美好" # 自然语言即可
+
+# OCEAN评分
+openness: 9
+conscientiousness: 7
+extraversion: 8
+agreeableness: 9
+neuroticism: 4
+
+# 生活细节
+personal_style: "自然风格，充满活力" # 自然语言即可
+
+# 时间戳
+created_date: "2087-04-01T00:00:00" # 时间戳
+last_updated: "2087-08-20T00:00:00" # 时间戳
+
+# 绑定信息
+bound_agent_id: ""
+is_bound: false
+
+
+# 动态属性初始化
+# public int CurrentHealth => currentHealth;
+# public int CurrentEnergy => currentEnergy;
+# public Array<Status> CurrentStatus => currentStatus;
+# public Dictionary<string, int> CurrentSkills => currentSkills;
+# public Dictionary<string, int> CurrentWarpedAttributes => currentWarpedAttributes;
+# public Array<string> Inventory => inventory;
+current_health: 75 #对新发现的兴奋影响睡眠
+current_energy: 85 #年轻有活力
+current_status: # id化，方便查找
+  - "excited_discovery"
+  - "mild_anxiety"
+current_skills: # id化，方便查找
+  - null #如果不用填写，则写null。注意，若填写这个技能将会与skills中的技能叠加，取最大集合。
+current_warped_attributes: 
+  - "warfare": null # 如果不需要填写，则写null。
+  - "adaptability": null
+  - "reasoning": null
+  - "perception": null
+  - "endurance": null
+  - "dexterity": null
+
+
+  # - "warfare": 10 #战争
+  # - "adaptability": 10 #适应性
+  # - "reasoning": 10 #理性
+  # - "perception": 10 #感知
+  # - "endurance": 10 #耐力
+  # - "dexterity": 10 #灵巧
+inventory: # id化，方便查找
+  - "lab_equipment"
+  - "camera"
+  - "plant_specimen"
+  - "research_notebook"
+  - "binoculars"
+  - "nature_guide"
+vote_weight: 1.0

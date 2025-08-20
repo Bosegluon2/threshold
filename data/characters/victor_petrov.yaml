@@ -1,0 +1,169 @@
+id: "victor_petrov"
+name: "维克托彼得罗夫"
+personality: "政治敏感，善于权衡各方利益，忠于政府"
+gender: "男"
+age: 41
+profession: "政府联络员"
+faction: "政府利益代表"
+education: "政治学硕士学位"
+background_story: "资深政府官员，负责监督重大科研项目，平衡各方利益。在普罗米修斯基地担任政府联络员，负责监督重大科研项目，平衡各方利益。"
+
+# 基本信息
+appearance: "中等身材，整洁发型，总是穿着正式西装"
+appearance_secrecy: 1
+speech_style: "外交辞令，措辞谨慎，善于留有余地"
+speech_style_secrecy: 2
+goals: "确保项目符合国家战略，平衡各方利益"
+goals_secrecy: 35
+fears: "项目失败影响政府声誉，个人前途受损"
+fears_secrecy: 25
+secrets: "掌握一些政府内部关于项目的机密信息"
+secrets_secrecy: 95
+traits: # 自然语言即可
+  - "政治敏感"
+  - "善于权衡"
+  - "忠诚"
+  - "谨慎"
+  - "权威"
+  
+# 技能和状态
+skills: # id化，方便查找
+  - "political_coordination"
+  - "interest_balance"
+  - "crisis_pr"
+
+status: # id化，方便查找
+  - "high_pressure"
+  - "information_overload"
+
+# 数值属性
+max_health: 85
+max_energy: 80
+max_thirst: 100
+max_satiety: 100
+
+thirst_consumption_rate: 5
+satiety_consumption_rate: 5
+
+base_warfare: 4
+base_adaptability: 8
+base_reasoning: 8
+base_perception: 9
+base_endurance: 6
+base_dexterity: 5
+knowledge_level: "Expert"
+
+# ========== 新增角色深度属性 ==========
+
+# 爱好与兴趣
+likes: #自然语言即可
+  - "国际象棋"
+  - "古典音乐"
+  - "国际政治"
+  - "战略分析"
+  - "高端社交活动"
+
+dislikes: #自然语言即可
+  - "不可控的局面"
+  - "透明度过高"
+  - "政治威胁"
+  - "失去权力"
+
+# 食物偏好
+favorite_foods: # id化，方便查找
+  - "russian_cuisine"
+  - "vodka"
+  - "formal_dinner"
+
+disliked_foods: # id化，方便查找
+  - "simple_local_food"
+  - "cheap_food"
+
+dietary_restrictions: # id化，方便查找
+  - "social_drinking"
+  # 社交场合饮酒
+
+# 初始化记忆
+memories:
+  - "第一次成功协调重大危机的成就感"
+  - "目睹政治斗争残酷性的教训"
+  - "进入政府核心部门的荣耀"
+
+initial_place: "prometheus_observatory_hall"
+
+# 生活习惯
+wake_up_time: 6
+sleep_time: 1
+personal_hygiene: "非常注重"
+
+# 情感与心理状态
+triggers: "被质疑忠诚度，政治失败"
+coping_mechanisms: "下棋，听音乐"
+comfort_method: "家族徽章，权力象征"
+
+# 价值观与信仰
+core_values: # 自然语言即可
+  - "国家利益至上"
+  - "稳定压倒一切"
+  - "权力与秩序"
+  - "政治平衡"
+
+moral_code: "为了大局可以做出妥协" # 自然语言即可
+life_philosophy: "稳定是最大的美德" # 自然语言即可
+
+# OCEAN评分
+openness: 7
+conscientiousness: 9
+extraversion: 8
+agreeableness: 6
+neuroticism: 6
+
+# 生活细节
+personal_style: "正式优雅，权威感强" # 自然语言即可
+
+# 时间戳
+created_date: "2087-04-05T00:00:00" # 时间戳
+last_updated: "2087-08-20T00:00:00" # 时间戳
+
+# 绑定信息
+bound_agent_id: ""
+is_bound: false
+
+
+# 动态属性初始化
+# public int CurrentHealth => currentHealth;
+# public int CurrentEnergy => currentEnergy;
+# public Array<Status> CurrentStatus => currentStatus;
+# public Dictionary<string, int> CurrentSkills => currentSkills;
+# public Dictionary<string, int> CurrentWarpedAttributes => currentWarpedAttributes;
+# public Array<string> Inventory => inventory;
+current_health: 80 #高压工作影响健康
+current_energy: 65 #信息过载消耗精力
+current_status: # id化，方便查找
+  - "high_pressure"
+  - "information_overload"
+current_skills: # id化，方便查找
+  - null #如果不用填写，则写null。注意，若填写这个技能将会与skills中的技能叠加，取最大集合。
+current_warped_attributes: 
+  - "warfare": null # 如果不需要填写，则写null。
+  - "adaptability": null
+  - "reasoning": null
+  - "perception": null
+  - "endurance": null
+  - "dexterity": null
+
+
+  # - "warfare": 10 #战争
+  # - "adaptability": 10 #适应性
+  # - "reasoning": 10 #理性
+  # - "perception": 10 #感知
+  # - "endurance": 10 #耐力
+  # - "dexterity": 10 #灵巧
+inventory: # id化，方便查找
+  - "government_documents"
+  - "family_badge"
+  - "diplomatic_briefcase"
+  - "secure_phone"
+  - "formal_suit"
+  - "chess_set"
+vote_weight: 1.0

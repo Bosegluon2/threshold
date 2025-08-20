@@ -1,0 +1,28 @@
+id: "farm"
+name: "农场"
+description: "一个生产食物和水资源的小型农场"
+type: "production"
+is_accessible: true
+position: [100, 0, 50]
+capacity: 5
+level: 1
+tags:
+  - "food"
+  - "water"
+state: "normal"
+environment: "outdoor"
+can_get_time: true
+can_get_weather: true
+can_get_location: false
+can_get_atmosphere: false
+light_level: 1.0
+temperature: 22.0
+
+# 脚本驱动的效果
+on_agent_enter_script: |
+  var agent = GetContext("agent")
+  print("欢迎来到农场！这里可以生产食物和水资源。")
+
+on_agent_leave_script: |
+  var agent = GetContext("agent")
+  print("感谢您在农场的辛勤工作！")

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbu4378oyp3og"]
+
+[ext_resource type="Script" uid="uid://gvkv7me7q76c" path="res://scripts/utils/SfxManager.cs" id="1_3qvym"]
+[ext_resource type="AudioStream" uid="uid://dbpkdsog0msrr" path="res://assets/audio/ui/sfx-hover.wav" id="2_hpy5k"]
+
+[node name="SfxManager" type="Node"]
+script = ExtResource("1_3qvym")
+
+[node name="Hover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_hpy5k")
