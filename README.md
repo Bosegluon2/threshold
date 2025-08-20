@@ -112,13 +112,13 @@ threshold/
 1. **克隆项目**
 
    ```bash
-   git clone [项目地址]
+   git clone https://github.com/Bosegluon2/threshold.git
    cd threshold
    ```
 
 2. **打开项目**
 
-   - [下载Godot 4.4.1 mono版本](https://github.com/godotengine/godot/releases/download/4.4.1-stable/Godot_v4.4.1-stable_mono_win64.zip)
+   - [下载 Godot 4.4.1 mono 版本](https://github.com/godotengine/godot/releases/download/4.4.1-stable/Godot_v4.4.1-stable_mono_win64.zip)
    - 启动 Godot 4.4.1 mono
    - 点击“导入”，选择项目文件夹
    - 等待项目导入完成
