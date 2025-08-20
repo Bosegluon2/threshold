@@ -9,7 +9,7 @@ namespace Threshold.Core.Agent.Functions
     /// </summary>
     public partial class GetOtherInformationFunction : Resource, IFunctionExecutor
     {
-        public string Name => "get_other_information";
+        public string Name => "get_other_info";
         public string Description => "获取其他角色的信息，根据权限显示不同详细程度";
         
         public FunctionResult Execute(Godot.Collections.Dictionary arguments, System.Collections.Generic.Dictionary<string, object> extraParams = null)

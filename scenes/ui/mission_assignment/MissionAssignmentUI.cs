@@ -418,18 +418,8 @@ namespace Threshold.UI.MissionAssignment
 
         private bool IsMissionFeasible(MissionType missionType, Threshold.Core.Data.Place targetPlace)
         {
-            if (targetPlace == null) return false;
-
-            return missionType switch
-            {
-                MissionType.Production => targetPlace.Type == "production",
-                MissionType.Exploration => targetPlace.Type == "exploration" || targetPlace.Type == "landmark",
-                MissionType.Combat => targetPlace.Type == "combat" || targetPlace.Type == "dangerous",
-                MissionType.Rescue => targetPlace.Type == "rescue" || targetPlace.Type == "medical",
-                MissionType.Delivery => targetPlace.Type == "delivery" || targetPlace.Type == "transport",
-                MissionType.Investigation => targetPlace.Type == "investigation" || targetPlace.Type == "research",
-                _ => true // 其他类型默认允许
-            };
+            // 使用统一的静态检查方法
+            return MissionSimulator.IsMissionTypeSuitableForPlace(missionType, targetPlace);
         }
 
 

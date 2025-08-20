@@ -12,7 +12,7 @@ namespace Threshold.Core.Agent.Functions
     /// </summary>
     public partial class GetPlaceInformationFunction : Resource, IFunctionExecutor
     {
-        public string Name => "get_place_information";
+        public string Name => "get_place_info";
         public string Description => "获取当前位置的信息";
 
         public FunctionResult Execute(Godot.Collections.Dictionary arguments, System.Collections.Generic.Dictionary<string, object> extraParams = null)

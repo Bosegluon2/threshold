@@ -338,7 +338,7 @@ public partial class MissionUi : Control
 		selectedAgent.SpeakInRoom(messageTextEdit.Text);
 		messageTextEdit.Text = "";
 	}
-	void AddAssistantMessage(string message)
+	void AddAssistantMessage(string message, Agent senderAgent)
 	{
 		if (selectedAgent == null) 
 		{
@@ -346,9 +346,17 @@ public partial class MissionUi : Control
 			return;
 		}
 		
+		// 检查发送者Agent是否与当前选中的Agent匹配
+		if (senderAgent == null || senderAgent.AgentId != selectedAgent.AgentId)
+		{
+			GD.Print($"AddAssistantMessage: 忽略来自 {senderAgent?.AgentName ?? "未知"} 的回复，当前选中: {selectedAgent.AgentName}");
+			return;
+		}
+		
 		GD.Print($"=== AddAssistantMessage 开始 ===");
 		GD.Print($"当前选中的Agent: {selectedAgent.AgentName} (ID: {selectedAgent.AgentId})");
 		GD.Print($"消息内容: {message}");
+		GD.Print($"发送者Agent: {senderAgent.AgentName} (ID: {senderAgent.AgentId})");
 		
 		// 创建AI消息并添加到Agent历史
 		var aiMessage = new ConversationMessage(message, "assistant", selectedAgent.AgentId);

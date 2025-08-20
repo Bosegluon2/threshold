@@ -16,7 +16,7 @@ namespace Threshold.Core.Agent
         public delegate void MessageAddedEventHandler(ConversationMessage message);
 
         [Signal]
-        public delegate void AIResponseReceivedEventHandler(string response);
+        public delegate void AIResponseReceivedEventHandler(string response, Agent senderAgent);
 
         [Signal]
         public delegate void ErrorOccurredEventHandler(string error);

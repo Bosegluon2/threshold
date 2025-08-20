@@ -130,8 +130,8 @@ namespace Threshold.Core.Agent
                         BroadcastToRoom(agent, response);
                     }
                     
-                    // 直接通知发送消息的Agent，而不是发出全局信号
-                    agent.EmitSignal(nameof(Agent.AIResponseReceived), response);
+                    // 直接通知发送消息的Agent，传递发送者Agent参数
+                    agent.EmitSignal(Agent.SignalName.AIResponseReceived, response, agent);
                 }
                 else
                 {

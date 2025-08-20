@@ -4,6 +4,7 @@ using Threshold.Core;
 using Threshold.Core.Agent;
 using Threshold.Core.Data;
 using System;
+using System.Linq;
 
 /// <summary>
 /// 这是一个简单的任务模拟器，暂时用于测试
@@ -83,6 +84,28 @@ public partial class MissionSimulator : Node
     {
         MissionAgents = new Array<Agent>();
         MissionCurrentTurn = 0;
+    }
+    
+    /// <summary>
+    /// 检查任务类型是否适合在指定地点执行
+    /// </summary>
+    /// <param name="missionType">任务类型</param>
+    /// <param name="targetPlace">目标地点</param>
+    /// <returns>是否适合执行</returns>
+    public static bool IsMissionTypeSuitableForPlace(MissionType missionType, Threshold.Core.Data.Place targetPlace)
+    {
+        if (targetPlace == null) return false;
+
+        return missionType switch
+        {
+            MissionType.Production => targetPlace.Type == "production"||targetPlace.Type == "industrial",
+            MissionType.Exploration =>true,
+            MissionType.Combat => targetPlace.Type == "combat" || targetPlace.Type == "dangerous",
+            MissionType.Rescue => targetPlace.Type == "rescue" || targetPlace.Type == "medical",
+            MissionType.Delivery => targetPlace.Type == "port" || targetPlace.Type == "transport",
+            MissionType.Investigation => targetPlace.Type == "ruins" || targetPlace.Type == "natural_hazard",
+            _ => true // 其他类型默认允许
+        };
     }
     
     public void AddAgent(Agent agent)
@@ -951,14 +974,14 @@ public partial class MissionSimulator : Node
     /// </summary>
     private void ExecuteExplorationPhase()
     {
-        // 检查目标地点是否适合探索
-        if (MissionTargetPlace?.Type != "exploration" && MissionTargetPlace?.Type != "landmark")
+        // 使用统一的静态检查方法
+        if (!IsMissionTypeSuitableForPlace(MissionType, MissionTargetPlace))
         {
             GD.PrintErr($"目标地点 {MissionTargetPlace?.Name ?? "未知"} 不适合执行探索任务");
             PhaseProgress += 10; // 少量进度
             return;
         }
-
+        
         // 探索任务：发现新地点或资源
         PhaseProgress += 20;
         GD.Print($"探索阶段进度: {PhaseProgress}%");
@@ -969,8 +992,8 @@ public partial class MissionSimulator : Node
     /// </summary>
     private void ExecuteCombatPhase()
     {
-        // 检查目标地点是否适合战斗
-        if (MissionTargetPlace?.Type != "combat" && MissionTargetPlace?.Type != "dangerous")
+        // 使用统一的静态检查方法
+        if (!IsMissionTypeSuitableForPlace(MissionType, MissionTargetPlace))
         {
             GD.PrintErr($"目标地点 {MissionTargetPlace?.Name ?? "未知"} 不适合执行战斗任务");
             PhaseProgress += 10; // 少量进度
@@ -987,8 +1010,8 @@ public partial class MissionSimulator : Node
     /// </summary>
     private void ExecuteRescuePhase()
     {
-        // 检查目标地点是否适合救援
-        if (MissionTargetPlace?.Type != "rescue" && MissionTargetPlace?.Type != "medical")
+        // 使用统一的静态检查方法
+        if (!IsMissionTypeSuitableForPlace(MissionType, MissionTargetPlace))
         {
             GD.PrintErr($"目标地点 {MissionTargetPlace?.Name ?? "未知"} 不适合执行救援任务");
             PhaseProgress += 10; // 少量进度
@@ -1005,8 +1028,8 @@ public partial class MissionSimulator : Node
     /// </summary>
     private void ExecuteDeliveryPhase()
     {
-        // 检查目标地点是否适合运输
-        if (MissionTargetPlace?.Type != "delivery" && MissionTargetPlace?.Type != "transport")
+        // 使用统一的静态检查方法
+        if (!IsMissionTypeSuitableForPlace(MissionType, MissionTargetPlace))
         {
             GD.PrintErr($"目标地点 {MissionTargetPlace?.Name ?? "未知"} 不适合执行运输任务");
             PhaseProgress += 10; // 少量进度
@@ -2508,7 +2531,7 @@ public partial class MissionSimulator : Node
                         float placeDifficulty = Math.Max(1.0f, place.Level);
                         
                         // 根据地点类型调整难度
-                        float typeMultiplier = GetPlaceTypeDifficultyMultiplier(place.Type);
+                        float typeMultiplier = place.Level;
                         
                         totalDifficulty += placeDifficulty * weight * typeMultiplier;
                         totalWeight += weight;
@@ -2534,23 +2557,4 @@ public partial class MissionSimulator : Node
     /// <summary>
     /// 获取地点类型的难度乘数
     /// </summary>
-    private float GetPlaceTypeDifficultyMultiplier(string placeType)
-    {
-        return placeType switch
-        {
-            "dangerous" => 1.5f,      // 危险地点难度更高
-            "combat" => 1.4f,         // 战斗地点
-            "hostile" => 1.6f,        // 敌对地点
-            "exploration" => 1.2f,    // 探索地点
-            "landmark" => 1.1f,       // 地标地点
-            "production" => 0.8f,     // 生产地点相对安全
-            "safe" => 0.7f,           // 安全地点
-            "medical" => 0.9f,        // 医疗地点
-            "rescue" => 1.3f,         // 救援地点
-            "research" => 1.1f,       // 研究地点
-            "transport" => 0.9f,      // 运输地点
-            "delivery" => 0.8f,       // 配送地点
-            _ => 1.0f                 // 默认乘数
-        };
-    }
 }

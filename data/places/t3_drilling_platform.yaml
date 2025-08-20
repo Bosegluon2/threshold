@@ -7,7 +7,7 @@ parent_id: ""
 position: [50, 0, 50]
 capacity: 12
 level: 2
-tags: ["resource", "zero_point_energy", "hazard", "offshore"]
+tags: [ "zpe"]
 state: "normal"
 environment: "outdoor"
 can_get_time: true

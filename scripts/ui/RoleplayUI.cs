@@ -355,9 +355,9 @@ namespace Threshold.UI
         /// <summary>
         /// AI响应接收事件
         /// </summary>
-        private void OnAIResponseReceived(string response)
+        private void OnAIResponseReceived(string response, Agent senderAgent)
         {
-            GD.Print($"AI回复: {response}");
+            GD.Print($"AI回复: {response} (来自: {senderAgent?.AgentName ?? "未知"})");
         }
         
         /// <summary>
@@ -847,9 +847,9 @@ namespace Threshold.UI
         /// <summary>
         /// Agent AI响应接收事件处理
         /// </summary>
-        private void OnAgentAIResponseReceived(string response)
+        private void OnAgentAIResponseReceived(string response, Agent senderAgent)
         {
-            GD.Print($"Agent AI回复: {response}");
+            GD.Print($"Agent AI回复: {response} (来自: {senderAgent?.AgentName ?? "未知"})");
             UpdateConversationDisplay();
         }
         

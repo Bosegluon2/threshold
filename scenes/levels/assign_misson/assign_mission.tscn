@@ -161,6 +161,7 @@ text = "asdasd"
 [node name="User" type="Label" parent="UI/S/S/Talk/Split/TalkPanel/V/S/Content"]
 layout_mode = 2
 size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.47451, 0.858824, 0.74902, 1)
 theme_override_font_sizes/font_size = 40
 text = "asdasd"
 

@@ -9,7 +9,7 @@ namespace Threshold.Core.Agent.Functions
     /// </summary>
     public partial class GetSelfInformationFunction : Resource, IFunctionExecutor
     {
-        public string Name => "get_self_information";
+        public string Name => "get_self_info";
         public string Description => "获取自己的角色信息，包括状态、技能、关系等";
         
         public FunctionResult Execute(Godot.Collections.Dictionary arguments, System.Collections.Generic.Dictionary<string, object> extraParams = null)

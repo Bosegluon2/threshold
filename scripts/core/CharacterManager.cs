@@ -252,6 +252,16 @@ namespace Threshold.Core
                 {
                     GD.PrintErr($"GetPlaceInformationFunction 注册失败: {ex.Message}");
                 }
+
+                try
+                {
+                    functionManager.RegisterFunction(new GetResourceInformationFunction());
+                    GD.Print("GetResourceInformationFunction 注册成功");
+                }
+                catch (Exception ex)
+                {
+                    GD.PrintErr($"GetResourceInformationFunction 注册失败: {ex.Message}");
+                }
                 try
                 {
                     functionManager.RegisterFunction(new UpdateRelationshipFunction());
