@@ -17,6 +17,7 @@
 # 构建输出
 /bin/
 obj/
+bin/
 build/
 *.dll
 *.exe
