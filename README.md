@@ -110,32 +110,37 @@ threshold/
 ## 快速开始
 
 1. **克隆项目**
+
    ```bash
    git clone [项目地址]
    cd threshold
    ```
 
 2. **打开项目**
-   - 启动Godot 4.4.1 mono
-   - 选择"导入"并选择项目文件夹
+
+   - [下载Godot 4.4.1 mono版本](https://github.com/godotengine/godot/releases/download/4.4.1-stable/Godot_v4.4.1-stable_mono_win64.zip)
+   - 启动 Godot 4.4.1 mono
+   - 点击“导入”，选择项目文件夹
    - 等待项目导入完成
 
 3. **运行项目**
-   - 主场景已设置为 `scenes/levels/TestScene.tscn`
-   - 点击运行按钮或按F5
+   - 点击右上角三角形运行按钮
 
 ## 开发指南
 
 ### 添加新角色
+
 1. 在 `data/characters/` 创建YAML文件
 2. 在 `data/image/characters/` 添加角色图片
 3. 在 `scenes/characters/` 创建角色场景
 
 ### 创建新任务
+
 1. 在 `data/events/` 定义任务事件
 2. 使用任务分配UI进行测试
 
 ### 添加新效果
+
 1. 在 `data/effects/` 定义效果
 2. 在 `scripts/core/effects/` 实现效果逻辑
 

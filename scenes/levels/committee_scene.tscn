@@ -26,7 +26,7 @@ corner_radius_top_right = 4280
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xo1cl"]
 shader = ExtResource("6_x1l1j")
 shader_parameter/levels = 500
-shader_parameter/_amount = 1.29
+shader_parameter/_amount = 0.5
 shader_parameter/_aberrationCenter = Vector2(0.5, 0.5)
 shader_parameter/_centerFade = 0.154
 

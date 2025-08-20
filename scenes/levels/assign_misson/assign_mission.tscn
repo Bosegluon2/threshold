@@ -39,7 +39,7 @@ expand_margin_bottom = 8.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_77t6o"]
 shader = ExtResource("7_4elkl")
 shader_parameter/levels = 500
-shader_parameter/_amount = 1.0
+shader_parameter/_amount = 0.3
 shader_parameter/_aberrationCenter = Vector2(0.5, 0.5)
 shader_parameter/_centerFade = 0.154
 

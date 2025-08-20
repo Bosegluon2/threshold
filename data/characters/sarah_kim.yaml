@@ -93,7 +93,7 @@ initial_place: "prometheus_observatory_hall"
 
 # 生活习惯
 wake_up_time: 7
-sleep_time: 1
+sleep_time: 22
 personal_hygiene: "注重清洁"
 
 # 情感与心理状态

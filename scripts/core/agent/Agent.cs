@@ -167,7 +167,7 @@ namespace Threshold.Core.Agent
                 GD.Print($"Agent {AgentName} 死亡，无法参加议会");
                 return false;
             }
-            if (!IsActive) // 忙于某项任务
+            if (IsActive) // 忙于某项任务
             {
                 GD.Print($"Agent {AgentName} 忙于某项任务，无法参加议会");
                 return false;

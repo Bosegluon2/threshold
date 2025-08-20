@@ -1,7 +1,7 @@
 using Godot;
 using Threshold.Core;
 using System;
-
+using Threshold.Core.Agent;
 public partial class CommitteeScene : Node3D
 {
 	// Called when the node enters the scene tree for the first time.
@@ -30,7 +30,17 @@ public partial class CommitteeScene : Node3D
 		committeeUi.SetStatus("休庭");
 		committeeUi.Reset();
 		
-		committeeManager.PolicyNegotiated += (policy, agent, opinion) =>
+		// 使用Connect方法订阅事件，这样可以在_ExitTree中正确取消订阅
+		committeeManager.PolicyNegotiated += OnPolicyNegotiated;
+		committeeManager.PolicySettled += OnPolicySettled;
+		
+		GD.Print("CommitteScene Ready");
+	}
+
+	private void OnPolicyNegotiated(Policy policy, Agent agent, PolicyPersonalOpinion opinion)
+	{
+		// 检查UI是否仍然有效
+		if (committeeUi != null && IsInstanceValid(committeeUi))
 		{
 			if (opinion.status == PolicyStatusType.Approved)
 			{
@@ -41,13 +51,26 @@ public partial class CommitteeScene : Node3D
 				committeeUi.AddReject(agent);
 			}
 			committeeUi.AddComment(opinion);
-		};
-		committeeManager.PolicySettled += async (policy, status) =>
+		}
+	}
+
+	private async void OnPolicySettled(Policy policy, PolicyStatusType status)
+	{
+		// 检查UI是否仍然有效
+		if (committeeUi != null && IsInstanceValid(committeeUi))
 		{
 			await committeeUi.Settlement(policy, status);
-		};
-		
-		GD.Print("CommitteScene Ready");
+		}
+	}
+
+	public override void _ExitTree()
+	{
+		// 取消事件订阅，防止在场景销毁后仍然调用已销毁的UI对象
+		if (committeeManager != null)
+		{
+			committeeManager.PolicyNegotiated -= OnPolicyNegotiated;
+			committeeManager.PolicySettled -= OnPolicySettled;
+		}
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
