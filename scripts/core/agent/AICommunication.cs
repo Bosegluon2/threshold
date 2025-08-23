@@ -12,10 +12,10 @@ namespace Threshold.Core.Agent
     /// </summary>
     public partial class AICommunication : Node
     {
-        private const string API_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions";
-        private const string API_KEY = "sk-0c107f2ef10441f7ac0def07e24d92ec";
+        private const string API_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1"; //任何支持function-call模型的提供商都可以
+        private const string API_KEY = "YOUR_API_KEY"; // 请替换为你的API_KEY
         
-        private const string MODEL = "qwen-plus";
+        private const string MODEL = "qwen-plus"; //任何支持function-call模型的提供商都可以
         private System.Net.Http.HttpClient httpClient;
         private FunctionManager functionManager;
         private Agent currentAgent; // 当前Agent引用
@@ -201,7 +201,7 @@ namespace Threshold.Core.Agent
             string jsonContent = Json.Stringify(requestData);
             GD.Print($"GetResponse请求数据: {jsonContent}");
             // 发送HTTP请求
-            using (var request = new HttpRequestMessage(HttpMethod.Post, API_URL))
+            using (var request = new HttpRequestMessage(HttpMethod.Post, API_URL+"/chat/completions"))
             {
                 request.Content = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
                 if (!string.IsNullOrEmpty(API_KEY))
@@ -301,7 +301,7 @@ namespace Threshold.Core.Agent
             // Content-Type 头由 StringContent 构造函数自动设置，无需手动添加
 
             GD.Print("正在发送HTTP请求...");
-            var response = await httpClient.PostAsync(API_URL, content);
+            var response = await httpClient.PostAsync(API_URL+"/chat/completions", content);
             var responseContent = await response.Content.ReadAsStringAsync();
 
             GD.Print($"HTTP响应状态: {response.StatusCode}");
@@ -677,7 +677,7 @@ namespace Threshold.Core.Agent
                     var finalHttpContent = new StringContent(finalJsonContent, Encoding.UTF8, "application/json");
                     
                     GD.Print("正在发送第二次请求...");
-                    var finalResponse = await httpClient.PostAsync(API_URL, finalHttpContent);
+                    var finalResponse = await httpClient.PostAsync(API_URL+"/chat/completions", finalHttpContent);
                     var finalResponseContent = await finalResponse.Content.ReadAsStringAsync();
                     
                     GD.Print($"第二次请求响应状态: {finalResponse.StatusCode}");

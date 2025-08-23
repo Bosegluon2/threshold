@@ -129,10 +129,23 @@ threshold/
    - 点击“导入”，选择项目文件夹
    - 等待项目导入完成
 
-3. **运行项目**
+3. **配置模型供应商和api key**
+
+   - 查看`scripts\core\agent\AICommunication.cs`，并修改里面的
+
+   ``` csharp
+   private const string API_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1"; //任何支持function-call模型的提供商都可以
+   private const string API_KEY = "YOUR_API_KEY"; // 请替换为你的API_KEY
+        
+   private const string MODEL = "qwen-plus"; //任何支持function-call模型的提供商都可以
+   ```
+
+4. **运行项目**
+
    - 点击右上角三角形运行按钮
 
-4. **常见问题**
+5. **常见问题**
+
    - 如果出现显卡问题，请尝试更新显卡驱动。
 
 ## 开发指南

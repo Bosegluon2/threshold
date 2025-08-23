@@ -359,13 +359,13 @@ object result = functionCallManager.CallFunction("global.getglobalvariable", "te
 
 2. **检查`FunctionCallTester.cs`中的调用：**
    - 将原代码：
-     csharp
-     object result = functionCallManager.CallFunction("global.getglobalvariable", "test_key");
-     
-     修改为直接调用函数而不捕获返回值：
-     csharp
-     functionCallManager.CallFunction("global.getglobalvariable", "test_key");
-     
+	 csharp
+	 object result = functionCallManager.CallFunction("global.getglobalvariable", "test_key");
+	 
+	 修改为直接调用函数而不捕获返回值：
+	 csharp
+	 functionCallManager.CallFunction("global.getglobalvariable", "test_key");
+	 
 
 3. **确认其他相关文件：**
    - 确保没有重复或冲突的`FunctionCallManager`定义。
@@ -488,11 +488,11 @@ object result = functionCallManager.CallFunction("global.getglobalvariable", "te
 1. **Agent类更新：**
    - 添加了`Health`和`Energy`属性，用于评估任务执行能力。
    - 新增方法：
-     - `GetBasicInfo()`：获取自己的基本信息（ID、名称、健康、精力等）。
-     - `GetDetailedInfo()`：获取自己的详细信息（职业、派别、年龄等）。
-     - `CanPerformTask()`：检查是否能完成任务（基于当前状态）。
-     - `GetOthersBasicInfo()`：获取他人的基本信息（普通人视角）。
-     - `GetOthersDetailedInfo()`：获取他人的详细信息（需特殊技能，如Doctor职业）。
+	 - `GetBasicInfo()`：获取自己的基本信息（ID、名称、健康、精力等）。
+	 - `GetDetailedInfo()`：获取自己的详细信息（职业、派别、年龄等）。
+	 - `CanPerformTask()`：检查是否能完成任务（基于当前状态）。
+	 - `GetOthersBasicInfo()`：获取他人的基本信息（普通人视角）。
+	 - `GetOthersDetailedInfo()`：获取他人的详细信息（需特殊技能，如Doctor职业）。
 
 2. **AICommunication类更新：**
    - 更新了`GetOwnBasicInfoFunction`、`GetOwnDetailedInfoFunction`、`GetOthersBasicInfoFunction`、`GetOthersDetailedInfoFunction`等方法，以支持权限控制。
@@ -502,9 +502,9 @@ object result = functionCallManager.CallFunction("global.getglobalvariable", "te
 
 4. **测试代码更新：**
    - 修改了`AgentFunctionCallTester.cs`，测试了新功能，包括：
-     - 普通人视角查看他人信息（仅基本信息）。
-     - Doctor视角查看他人信息（可获取详细信息）。
-     - 获取自己信息的功能。
+	 - 普通人视角查看他人信息（仅基本信息）。
+	 - Doctor视角查看他人信息（可获取详细信息）。
+	 - 获取自己信息的功能。
 
 **关键改进点：**
 - 实现了基于身份的信息访问控制，确保只能获取自己的信息。
@@ -2174,10 +2174,10 @@ Agent消息添加: 执行函数时发生错误: Object reference not set to an i
    - 实现了`EventManager.cs`，管理事件森林池，支持预生成机制和事件激活逻辑。
    - 在`Global.cs`中初始化了事件系统，加载并链接所有事件和效果。
    - 创建了示例YAML文件，包括：
-     - 角色效果：`increased_intelligence.yaml`
-     - 世界效果：`global_peace.yaml`
-     - 地点效果：`enchanted_library.yaml`
-     - 事件森林：`daily_quests.yaml`（日常任务）和`main_story.yaml`（主故事线）
+	 - 角色效果：`increased_intelligence.yaml`
+	 - 世界效果：`global_peace.yaml`
+	 - 地点效果：`enchanted_library.yaml`
+	 - 事件森林：`daily_quests.yaml`（日常任务）和`main_story.yaml`（主故事线）
 
 4. **目录结构**：
    - `data/effects/character/`、`data/effects/world/`、`data/effects/place/`：存储不同类型的YAML效果文件。

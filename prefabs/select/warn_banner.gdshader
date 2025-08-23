@@ -25,7 +25,7 @@ void fragment() {
 
     // 多条线：proj / spacing 周期性取余
     float line_pos = fract((proj - t) / line_spacing);
-	
+
     // 硬边界线条
     float mask = step(line_pos, line_width / line_spacing);
     ALBEDO = line_color.rgb;
