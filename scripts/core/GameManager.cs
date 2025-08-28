@@ -128,7 +128,10 @@ namespace Threshold.Core
             // EventManager.TriggerEvents(CurrentTurn);
             CharacterManager.UpdateCharacters(CurrentTurn);
             ResourceManager.UpdateResources(CurrentTurn);
-            foreach (var mission in MissionManager.ActiveMissions)
+            
+            // 创建ActiveMissions的副本以避免在迭代时修改集合
+            var missionsToProcess = new Array<MissionSimulator>(MissionManager.ActiveMissions);
+            foreach (var mission in missionsToProcess)
             {
                 var result = MissionManager.StepMission(mission, CurrentTurn);
                 if (!result)
