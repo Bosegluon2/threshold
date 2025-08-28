@@ -41,6 +41,10 @@ window/stretch/aspect="expand"
 
 project/assembly_name="Threshold"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gd-texture-export-addon/plugin.cfg")
+
 [input]
 
 click={
